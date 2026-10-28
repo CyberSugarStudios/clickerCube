@@ -7,7 +7,7 @@ signal broken(gold_reward: float)
 #region - VARS
 var is_broken: bool = false
 var cur_hp: float
-var hit_tween: Tween
+var scale_tween: Tween
 
 #region - EXPORT VARS
 @export var max_hp: float = 10
@@ -22,8 +22,8 @@ var hit_tween: Tween
 
 func _ready() -> void:
 	model.scale = Vector3.ZERO
-	var grow_tween := create_tween()
-	grow_tween.tween_property(model, "scale", Vector3.ONE, 0.2)
+	scale_tween = create_tween()
+	scale_tween.tween_property(model, "scale", Vector3.ONE, 0.5)
 	cur_hp = max_hp
 
 func take_damage(amount: float) -> void:
@@ -35,25 +35,24 @@ func take_damage(amount: float) -> void:
 		kill_cube()
 
 func play_hit_squash() -> void:
-	if hit_tween:
-		hit_tween.kill()
+	if scale_tween:
+		scale_tween.kill()
 	model.scale = Vector3.ONE
-	hit_tween = create_tween()
-	hit_tween.tween_property(model, "scale", Vector3(0.9, 0.9, 0.9), 0.05)
-	hit_tween.tween_property(model, "scale", Vector3.ONE, 0.5)
+	scale_tween = create_tween()
+	scale_tween.tween_property(model, "scale", Vector3(0.9, 0.9, 0.9), 0.05)
+	scale_tween.tween_property(model, "scale", Vector3.ONE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func kill_cube() -> void:
 	is_broken = true
 	$CollisionShape3D.set_deferred("disabled", true)
 	broken.emit(gold_reward)
-	if hit_tween:
-		hit_tween.kill()
-	var break_tween := create_tween()
-	break_tween.tween_property(model, "scale", Vector3.ZERO, 0.1)
-	break_tween.tween_callback(queue_free)
+	if scale_tween:
+		scale_tween.kill()
+	scale_tween = create_tween()
+	scale_tween.tween_property(model, "scale", Vector3.ZERO, 0.15)
+	scale_tween.tween_callback(queue_free)
 
 func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		var damage := GameState.get_click_damage()
 		take_damage(damage)
-		print("Hit for: ", damage, " | HP: ", cur_hp)
