@@ -10,9 +10,16 @@ config_version=5
 
 [application]
 
-config/name="clickerCube"
+config/name="WT: Cube Clicker"
+config/version="2026.10.28.0.0.1"
+run/main_scene="uid://vjfv8uvh3sl6"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*uid://cpvh1orjxoixm"
+SaveManager="*uid://f7wb2wdhddcp"
 
 [display]
 
