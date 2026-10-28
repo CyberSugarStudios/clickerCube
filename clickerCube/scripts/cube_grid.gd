@@ -18,5 +18,4 @@ func spawn_cube() -> void:
 
 func _on_cube_broken(gold_reward: float) -> void:
 	GameState.add_gold(gold_reward)
-	print("Gold: ", GameState.gold)
 	spawn_cube()

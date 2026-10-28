@@ -8,7 +8,7 @@
 [node name="Cube" type="StaticBody3D" unique_id=167588988]
 script = ExtResource("1_8viuf")
 
-[node name="cube" parent="." unique_id=1073841540 instance=ExtResource("2_i7q2r")]
+[node name="Model" parent="." unique_id=1073841540 instance=ExtResource("2_i7q2r")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=849457780]
 shape = SubResource("BoxShape3D_53m36")
