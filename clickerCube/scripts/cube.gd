@@ -30,6 +30,9 @@ func _ready() -> void:
 
 func set_locked(value: bool) -> void:
 	is_locked = value
+	#if is_locked:
+		#var mat = Material.new()
+		#mat.color = Color.GRAY
 
 func take_damage(amount: float) -> void:
 	if is_broken:
