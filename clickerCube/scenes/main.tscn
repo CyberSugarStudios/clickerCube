@@ -4,6 +4,9 @@
 
 [sub_resource type="Environment" id="Environment_8viuf"]
 background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.44291076, 0.44291076, 0.44291073, 1)
+ambient_light_energy = 0.5
 
 [node name="Main" type="Node3D" unique_id=293905322]
 
@@ -16,4 +19,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.023337)
 environment = SubResource("Environment_8viuf")
 
 [node name="CubeGrid" parent="." unique_id=849150432 instance=ExtResource("1_o5qli")]
-transform = Transform3D(0.8660253, -0.35355335, 0.35355335, 0, 0.7071067, 0.7071067, -0.49999997, -0.61237234, 0.61237234, 0, 0, 0)
