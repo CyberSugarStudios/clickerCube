@@ -1,22 +1,16 @@
 extends StaticBody3D
 
-var maxHP
-var curHP
-var goldReward
+@export var max_hp: float = 10
+@export var cur_hp: float = 10
+@export var gold_reward: float = 10
 
 signal broken
 
-func _ready() -> void:
-	maxHP = 10
-	curHP = 10
-	goldReward = 10
-
-func CubeClicked():
-	#curHP -= clickPower?
-	if curHP <= 0:
+func take_damage(amount):
+	cur_hp -= amount
+	if cur_hp <= 0:
 		KillCube()
-	pass
 
 func KillCube():
-	self.broken
-	#self.get_tree().quit()?
+	emit_signal("broken")
+	queue_free()

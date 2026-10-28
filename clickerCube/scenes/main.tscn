@@ -2,13 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://cffuuluhg7y5d" path="res://scenes/cube_grid.tscn" id="1_o5qli"]
 
+[sub_resource type="Environment" id="Environment_8viuf"]
+background_mode = 1
+
 [node name="Main" type="Node3D" unique_id=293905322]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=606162580]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3879426)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.023337)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=547424010]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1048497023]
+environment = SubResource("Environment_8viuf")
 
 [node name="CubeGrid" parent="." unique_id=849150432 instance=ExtResource("1_o5qli")]
+transform = Transform3D(0.8660253, -0.35355335, 0.35355335, 0, 0.7071067, 0.7071067, -0.49999997, -0.61237234, 0.61237234, 0, 0, 0)
