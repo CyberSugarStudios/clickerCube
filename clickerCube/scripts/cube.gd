@@ -8,6 +8,8 @@ signal broken(gold_reward: float)
 var is_broken: bool = false
 var cur_hp: float
 var scale_tween: Tween
+var layer: int = 0
+var is_locked: bool = false
 
 #region - EXPORT VARS
 @export var max_hp: float = 10
@@ -26,8 +28,14 @@ func _ready() -> void:
 	scale_tween.tween_property(model, "scale", Vector3.ONE, 0.5)
 	cur_hp = max_hp
 
+func set_locked(value: bool) -> void:
+	is_locked = value
+
 func take_damage(amount: float) -> void:
 	if is_broken:
+		return
+	if is_locked:
+		#play clink locked sound
 		return
 	cur_hp -= amount
 	play_hit_squash()

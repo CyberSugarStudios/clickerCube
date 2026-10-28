@@ -19,7 +19,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.023337)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1048497023]
 environment = SubResource("Environment_8viuf")
 
-[node name="CubeGrid" parent="." unique_id=849150432 instance=ExtResource("1_o5qli")]
+[node name="CubeGrid" parent="." unique_id=849150432 node_paths=PackedStringArray("camera") instance=ExtResource("1_o5qli")]
+camera = NodePath("../Camera3D")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=176677137]
 
