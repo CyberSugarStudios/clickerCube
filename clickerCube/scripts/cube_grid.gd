@@ -25,9 +25,9 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int) -> void:
 	var cube := CUBE_SCENE.instantiate() as Cube
 	cube.position = Vector3(grid_pos) * CUBE_SPACING
 	cube.layer = cube_layer
-	cube.set_locked(cube_layer != active_layer)
 	cube.broken.connect(_on_cube_broken.bind(cube))
 	add_child(cube)
+	cube.set_locked(cube_layer != active_layer)
 	shells[cube_layer].append(cube)
 
 func build_grid(size: int) -> void:

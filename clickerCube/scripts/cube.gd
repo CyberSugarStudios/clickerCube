@@ -14,10 +14,12 @@ var is_locked: bool = false
 #region - EXPORT VARS
 @export var max_hp: float = 10
 @export var gold_reward: float = 10
+@export var locked_material: Material
 #endregion
 
 #region - ONREADY VARS
 @onready var model: Node3D = $Model
+@onready var  mesh: MeshInstance3D = $Model/Cube
 #endregion
 #endregion
 #endregion
@@ -30,9 +32,7 @@ func _ready() -> void:
 
 func set_locked(value: bool) -> void:
 	is_locked = value
-	#if is_locked:
-		#var mat = Material.new()
-		#mat.color = Color.GRAY
+	mesh.material_override = locked_material if value else null
 
 func take_damage(amount: float) -> void:
 	if is_broken:

@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dl0fcb8p6nj1e"]
 
 [ext_resource type="Script" uid="uid://526ymd44caao" path="res://scripts/cube.gd" id="1_8viuf"]
+[ext_resource type="Material" uid="uid://c6wa7thx3faah" path="res://assets/materials/locked_cube.tres" id="2_0d7ej"]
 [ext_resource type="PackedScene" uid="uid://detedgvebrx0i" path="res://assets/models/cube.glb" id="2_i7q2r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_53m36"]
 
 [node name="Cube" type="StaticBody3D" unique_id=167588988]
 script = ExtResource("1_8viuf")
+locked_material = ExtResource("2_0d7ej")
 
 [node name="Model" parent="." unique_id=1073841540 instance=ExtResource("2_i7q2r")]
 
