@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cffuuluhg7y5d"]
 
-[ext_resource type="PackedScene" uid="uid://dl0fcb8p6nj1e" path="res://scenes/cube.tscn" id="1_pkjvo"]
+[ext_resource type="Script" uid="uid://dppkyuuegk3t3" path="res://scenes/cube_grid.gd" id="1_pkjvo"]
 
 [node name="CubeGrid" type="Node3D" unique_id=849150432]
-
-[node name="Cube" parent="." unique_id=167588988 instance=ExtResource("1_pkjvo")]
+script = ExtResource("1_pkjvo")
