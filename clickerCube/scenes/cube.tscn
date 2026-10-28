@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dl0fcb8p6nj1e"]
+
+[ext_resource type="Script" uid="uid://526ymd44caao" path="res://scripts/cube.gd" id="1_8viuf"]
+[ext_resource type="PackedScene" uid="uid://detedgvebrx0i" path="res://assets/models/cube.glb" id="2_i7q2r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53m36"]
+
+[node name="Cube" type="StaticBody3D" unique_id=167588988]
+script = ExtResource("1_8viuf")
+
+[node name="cube" parent="." unique_id=1073841540 instance=ExtResource("2_i7q2r")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=849457780]
+shape = SubResource("BoxShape3D_53m36")

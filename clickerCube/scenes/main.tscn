@@ -1,5 +1,14 @@
 [gd_scene format=3 uid="uid://vjfv8uvh3sl6"]
 
+[ext_resource type="PackedScene" uid="uid://cffuuluhg7y5d" path="res://scenes/cube_grid.tscn" id="1_o5qli"]
+
 [node name="Main" type="Node3D" unique_id=293905322]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=606162580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3879426)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=547424010]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1048497023]
+
+[node name="CubeGrid" parent="." unique_id=849150432 instance=ExtResource("1_o5qli")]
