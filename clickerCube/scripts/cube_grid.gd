@@ -12,7 +12,7 @@ func _ready() -> void:
 	spawn_cube()
 
 func spawn_cube() -> void:
-	var cube = CUBE_SCENE.instantiate() as Cube
+	var cube := CUBE_SCENE.instantiate() as Cube
 	cube.broken.connect(_on_cube_broken)
 	add_child(cube)
 

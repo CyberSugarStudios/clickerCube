@@ -7,7 +7,7 @@ signal gold_changed(new_amount: float)
 var gold: float = 0.0
 var click_damage: float = 1.0
 var crit_chance: float = 0.05
-var crit_mult: float = 2
+var crit_mult: float = 2.0
 #endregion
 #endregion
 

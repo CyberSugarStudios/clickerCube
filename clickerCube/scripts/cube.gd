@@ -25,7 +25,6 @@ func take_damage(amount: float) -> void:
 	cur_hp -= amount
 	#tween a slight shrink and return to normal size
 	if cur_hp <= 0:
-		#cur_hp = max_hp #infinite testing
 		kill_cube()
 
 func kill_cube() -> void:
