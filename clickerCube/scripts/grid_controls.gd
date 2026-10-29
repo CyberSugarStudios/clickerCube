@@ -12,6 +12,7 @@ extends Node
 @export var click_streak_window: float = 0.35
 #endregion
 
+var is_mouse_rotating: bool = false
 var last_tap_time: float = -1.0
 var in_click_streak: bool = false
 var is_pressing: bool = false
@@ -23,6 +24,21 @@ var press_time: float = 0.0
 #endregion
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.device == InputEvent.DEVICE_ID_EMULATION:
+		return
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			queue_tap(event.position)
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			is_mouse_rotating = event.pressed
+		return
+	
+	if event is InputEventMouseMotion:
+		if is_mouse_rotating:
+			rotate_grid(event.relative)
+		return
+	
 	if event is InputEventScreenTouch and event.index == 0:
 		if event.pressed:
 			is_pressing = true
@@ -43,7 +59,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		var threshold := quick_drag_threshold if use_quick else drag_threshold
 		if not is_dragging and event.position.distance_to(press_pos) > threshold:
 			is_dragging = true
-			print("Drag started: held %.2fs, moved %.0fpx, threshold %.0f" % [held_for, event.position.distance_to(press_pos), threshold])
 		if is_dragging:
 			grid.rotate(Vector3.UP, event.relative.x * rotate_speed)
 			grid.rotate(Vector3.RIGHT, event.relative.y * rotate_speed)
@@ -63,3 +78,11 @@ func hit_cube_at(screen_pos: Vector2) -> void:
 	var cube := result.collider as Cube
 	if cube:
 		cube.take_damage(GameState.get_click_damage())
+
+func queue_tap(screen_pos: Vector2) -> void:
+	pending_tap = true
+	tap_pos = screen_pos
+
+func rotate_grid(relative: Vector2) -> void:
+	grid.rotate(Vector3.UP, relative.x * rotate_speed)
+	grid.rotate(Vector3.RIGHT, relative.y * rotate_speed)
