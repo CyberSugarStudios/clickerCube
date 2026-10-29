@@ -40,10 +40,11 @@ script = ExtResource("2_y8wt7")
 
 [node name="DronePip" parent="SkillTree" unique_id=1717460691 instance=ExtResource("3_e43w8")]
 layout_mode = 0
-offset_left = 323.0
-offset_top = 177.0
-offset_right = 453.0
-offset_bottom = 227.0
+offset_left = 281.0
+offset_top = 161.0
+offset_right = 411.0
+offset_bottom = 211.0
+text = "Drone Pip"
 skill = ExtResource("4_l737n")
 
 [node name="SplashPip" parent="SkillTree" unique_id=674229285 instance=ExtResource("3_e43w8")]
@@ -52,6 +53,7 @@ offset_left = 887.0
 offset_top = 86.0
 offset_right = 1017.0
 offset_bottom = 136.0
+text = "Splash Pip"
 skill = ExtResource("5_05byw")
 
 [node name="GoldPip" parent="SkillTree" unique_id=1085610602 instance=ExtResource("3_e43w8")]
@@ -60,6 +62,7 @@ offset_left = 534.0
 offset_top = 510.0
 offset_right = 664.0
 offset_bottom = 560.0
+text = "Gold Pip"
 skill = ExtResource("6_yjqyk")
 
 [node name="TNTPip" parent="SkillTree" unique_id=227723733 instance=ExtResource("3_e43w8")]
@@ -68,6 +71,7 @@ offset_left = 709.0
 offset_top = 199.0
 offset_right = 839.0
 offset_bottom = 249.0
+text = "TNT Pip"
 skill = ExtResource("7_gt6k6")
 
 [node name="DroneSplashPip" parent="SkillTree" unique_id=1261396997 instance=ExtResource("3_e43w8")]
@@ -76,6 +80,7 @@ offset_left = 515.0
 offset_top = 70.0
 offset_right = 645.0
 offset_bottom = 120.0
+text = "Drone Splash Pip"
 skill = ExtResource("8_bcj47")
 
 [node name="GoldTNTPip" parent="SkillTree" unique_id=1472685683 instance=ExtResource("3_e43w8")]
@@ -84,6 +89,7 @@ offset_left = 793.0
 offset_top = 407.0
 offset_right = 923.0
 offset_bottom = 457.0
+text = "Gold TNT Pip"
 skill = ExtResource("9_1yc81")
 
 [node name="BlackHoleButton" type="Button" parent="." unique_id=1529861869]
@@ -105,17 +111,17 @@ text = "◼"
 
 [node name="Choices" type="VBoxContainer" parent="." unique_id=1927813468]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -264.0
-offset_right = 20.0
-offset_bottom = -224.00027
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = 60.0
+offset_right = 93.0
+offset_bottom = 126.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="ContinueButton" type="Button" parent="Choices" unique_id=1286122179]
 layout_mode = 2

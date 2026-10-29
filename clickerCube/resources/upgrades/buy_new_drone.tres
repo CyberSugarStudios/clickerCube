@@ -8,5 +8,6 @@ script = ExtResource("1_thyxr")
 id = &"buy_new_drone"
 display_name = "Buy Drone"
 base_cost = 100.0
+cost_growth = 1.75
 required_skill = ExtResource("1_rtfn1")
 metadata/_custom_type_script = "uid://bq12hl8w5hnj5"
