@@ -36,4 +36,3 @@ script = ExtResource("2_0wfyh")
 script = ExtResource("3_sugp2")
 camera = NodePath("../Camera3D")
 grid = NodePath("../CubeGrid")
-quick_tap_time = 1.0
