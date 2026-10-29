@@ -48,8 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			in_click_streak = last_tap_time >= 0.0 and press_time - last_tap_time < click_streak_window
 		else:
 			if is_pressing and not is_dragging:
-				pending_tap = true
-				tap_pos = event.position
+				queue_tap(event.position)
 				last_tap_time = Time.get_ticks_msec() / 1000.0
 			is_pressing = false
 			is_dragging = false
@@ -60,8 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not is_dragging and event.position.distance_to(press_pos) > threshold:
 			is_dragging = true
 		if is_dragging:
-			grid.rotate(Vector3.UP, event.relative.x * rotate_speed)
-			grid.rotate(Vector3.RIGHT, event.relative.y * rotate_speed)
+			rotate_grid(event.relative)
 
 func _physics_process(_delta: float) -> void:
 	if pending_tap:
