@@ -8,7 +8,7 @@ class_name DamageNumber
 func setup(amount: float, screen_pos: Vector2, is_crit: bool) -> void:
 	text = String.num(amount, 1)
 	var jitter := Vector2(randf_range(-15.0, 15.0), 0.0)
-	position = screen_pos - custom_maximum_size / 2.0 + jitter
+	position = screen_pos - custom_minimum_size / 2.0 + jitter
 	if is_crit:
 		add_theme_font_size_override("font_size", 40)
 		add_theme_color_override("font_color", Color.RED)

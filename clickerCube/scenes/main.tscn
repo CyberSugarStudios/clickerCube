@@ -32,13 +32,6 @@ camera = NodePath("../Camera3D")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=176677137]
 
-[node name="GoldLabel" type="Label" parent="UI" unique_id=43094549]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 32
-text = "Gold: 0"
-script = ExtResource("2_0wfyh")
-
 [node name="ShopPanel" type="PanelContainer" parent="UI" unique_id=1852351088]
 custom_minimum_size = Vector2(280, 0)
 anchors_preset = 11
@@ -51,6 +44,13 @@ grow_vertical = 2
 
 [node name="UpgradeList" type="VBoxContainer" parent="UI/ShopPanel" unique_id=978731285]
 layout_mode = 2
+
+[node name="GoldLabel" type="Label" parent="UI/ShopPanel/UpgradeList" unique_id=43094549]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Gold: 0"
+horizontal_alignment = 1
+script = ExtResource("2_0wfyh")
 
 [node name="UpgradesLabel" type="Label" parent="UI/ShopPanel/UpgradeList" unique_id=1603557011]
 layout_mode = 2
@@ -103,7 +103,8 @@ galaxy_screen = NodePath("../GalaxyScreen")
 [node name="GalaxyScreen" parent="UI" unique_id=1617890461 instance=ExtResource("7_tipki")]
 visible = false
 
-[node name="GridControls" type="Node" parent="." unique_id=523963857 node_paths=PackedStringArray("camera", "grid")]
+[node name="GridControls" type="Node" parent="." unique_id=523963857 node_paths=PackedStringArray("camera", "grid", "damage_numbers")]
 script = ExtResource("3_sugp2")
 camera = NodePath("../Camera3D")
 grid = NodePath("../CubeGrid")
+damage_numbers = NodePath("../UI/DamageNumbers")
