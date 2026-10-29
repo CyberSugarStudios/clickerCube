@@ -38,6 +38,7 @@ func complete_run() -> void:
 	var earned := run_number
 	core_shards += earned
 	core_shards_changed.emit(core_shards)
+	run_completed.emit(earned)
 
 func start_next_run() -> void:
 	run_number += 1

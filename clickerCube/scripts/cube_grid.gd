@@ -85,3 +85,7 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 		else:
 			grid_size += 2
 			build_grid(grid_size)
+	else:
+		for inner_cube: Cube in shells[active_layer]:
+			inner_cube.set_locked(false)
+		zoom_camera_to(active_layer * 2 + 1)
