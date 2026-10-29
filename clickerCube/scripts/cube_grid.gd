@@ -27,7 +27,7 @@ func _ready() -> void:
 	start_run()
 
 func start_run() -> void:
-	grid_size = 1
+	grid_size = 1 if GameState.run_number == 1 else GameState.get_max_grid_size()
 	build_grid(grid_size)
 
 func zoom_camera_to(visible_size: int) -> void:
