@@ -10,6 +10,7 @@ extends Node
 @export var quick_tap_time: float = 0.10
 @export var rotate_speed: float = 0.01
 @export var click_streak_window: float = 0.35
+@export var damage_numbers: DamageNumbers
 #endregion
 
 var is_mouse_rotating: bool = false
@@ -74,8 +75,12 @@ func hit_cube_at(screen_pos: Vector2) -> void:
 	if result.is_empty():
 		return
 	var cube := result.collider as Cube
-	if cube:
-		cube.take_damage(GameState.get_click_damage())
+	if cube == null:
+		return
+	var is_crit := GameState.roll_crit()
+	var damage := GameState.get_click_damage(is_crit)
+	if cube.take_damage(damage) and damage_numbers:
+		damage_numbers.spawn(damage, result.position, is_crit)
 
 func queue_tap(screen_pos: Vector2) -> void:
 	pending_tap = true

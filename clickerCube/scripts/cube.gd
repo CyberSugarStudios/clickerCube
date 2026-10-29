@@ -38,17 +38,18 @@ func set_locked(value: bool) -> void:
 	is_locked = value
 	mesh.material_override = locked_material if value else null
 
-func take_damage(amount: float) -> void:
+func take_damage(amount: float) -> bool:
 	#the cube takes damage unless it is already broken
 	if is_broken:
-		return
+		return false
 	if is_locked:
 		#play clink locked sound
-		return
+		return false
 	cur_hp -= amount
 	play_hit_squash()
 	if cur_hp <= 0:
 		kill_cube()
+	return true
 
 func play_hit_squash() -> void:
 	#animation for clicking and damaging a cube

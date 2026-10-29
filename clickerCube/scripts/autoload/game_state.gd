@@ -49,10 +49,11 @@ func add_gold(amount: float) -> void:
 	gold += amount
 	gold_changed.emit(gold)
 
-func get_click_damage() -> float:
-	if randf() < crit_chance:
-		return click_damage * crit_mult
-	return click_damage
+func roll_crit() -> bool:
+	return  randf() < crit_chance
+
+func get_click_damage(is_crit: bool) -> float:
+	return click_damage * crit_mult if is_crit else click_damage
 
 func get_level(upgrade: UpgradeData) -> int:
 	return upgrade_levels.get(upgrade.id, 0)

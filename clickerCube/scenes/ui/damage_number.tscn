@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bb5fvly41fus5"]
+
+[ext_resource type="Script" uid="uid://c8hpnwmdicxqy" path="res://scripts/ui/damage_number.gd" id="1_ul084"]
+
+[node name="DamageNumber" type="Label" unique_id=1655687706]
+custom_minimum_size = Vector2(120, 40)
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "#"
+horizontal_alignment = 1
+script = ExtResource("1_ul084")
