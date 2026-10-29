@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillNodeData" format=3 uid="uid://do8u4u2c6frx0"]
+
+[ext_resource type="Script" uid="uid://cl8wswtdujur6" path="res://scripts/data/skill_node_data.gd" id="1_e8gcw"]
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="2_iuyar"]
+
+[resource]
+script = ExtResource("1_e8gcw")
+id = &"splash_damage"
+display_name = "Explosive Clicks"
+description = "Your clicks now deal a small amount of damage to all surrounding blocks."
+cost = 2
+prereqs = Array[ExtResource("1_e8gcw")]([ExtResource("2_iuyar")])
+metadata/_custom_type_script = "uid://cl8wswtdujur6"

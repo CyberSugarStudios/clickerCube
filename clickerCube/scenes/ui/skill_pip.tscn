@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bv71v8vv5llp"]
+
+[ext_resource type="Script" uid="uid://cn7c662fyjhp8" path="res://scripts/ui/skill_pip.gd" id="1_obtpt"]
+
+[node name="SkillPip" type="Button" unique_id=1717460691]
+custom_minimum_size = Vector2(130, 50)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_obtpt")

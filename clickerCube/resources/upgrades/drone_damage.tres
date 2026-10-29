@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://dv4b3vha2g54i"]
+
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_b2tae"]
+[ext_resource type="Resource" uid="uid://b3adompjf0v7b" path="res://resources/skills/clicker_drone.tres" id="1_r3di3"]
+
+[resource]
+script = ExtResource("1_b2tae")
+id = &"drone_damage"
+display_name = "Drone Damage"
+base_cost = 50.0
+effect_per_level = 0.1
+required_skill = ExtResource("1_r3di3")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

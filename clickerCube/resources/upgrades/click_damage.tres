@@ -6,4 +6,5 @@
 script = ExtResource("1_wet65")
 id = &"click_damage"
 display_name = "Click Damage"
+effect_per_level = 0.5
 metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

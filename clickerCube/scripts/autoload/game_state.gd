@@ -6,6 +6,7 @@ signal upgrades_changed
 signal core_shards_changed(new_amount: int)
 signal run_completed(shards_earned: int)
 signal run_started
+signal skills_changed
 
 #region - CONSTS
 const BASE_CLICK_DAMAGE: float = 1.0
@@ -27,6 +28,8 @@ var crit_mult: float = 2.0
 
 var core_shards: int = 0
 var run_number: int = 1
+
+var unlocked_skills: Array[StringName] = []
 #endregion
 #endregion
 
@@ -43,6 +46,29 @@ func complete_run() -> void:
 func start_next_run() -> void:
 	run_number += 1
 	run_started.emit()
+#endregion
+
+#region - SKILLS
+func has_skill(skill: SkillNodeData) -> bool:
+	return skill.id in unlocked_skills
+
+func prereqs_met(skill: SkillNodeData) -> bool:
+	for required: SkillNodeData in skill.prereqs:
+		if not has_skill(required):
+			return false
+	return true
+
+func can_buy_skill(skill: SkillNodeData) -> bool:
+	return not has_skill(skill) and prereqs_met(skill) and core_shards >= skill.cost
+
+func try_buy_skill(skill: SkillNodeData) -> bool:
+	if not can_buy_skill(skill):
+		return false
+	core_shards -= skill.cost
+	unlocked_skills.append(skill.id)
+	core_shards_changed.emit(core_shards)
+	skills_changed.emit()
+	return true
 #endregion
 
 func add_gold(amount: float) -> void:
@@ -67,6 +93,8 @@ func _ready() -> void:
 	recalc_stats()
 
 func try_buy(upgrade: UpgradeData) -> bool:
+	if upgrade.required_skill and not has_skill(upgrade.required_skill):
+		return false
 	var level := get_level(upgrade)
 	if upgrade.is_maxed(level):
 		return false

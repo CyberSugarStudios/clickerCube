@@ -6,9 +6,13 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	GameState.gold_changed.connect(refresh.unbind(1))
 	GameState.upgrades_changed.connect(refresh)
+	GameState.skills_changed.connect(refresh)
 	refresh()
 
 func refresh() -> void:
+	visible = upgrade.required_skill == null or GameState.has_skill(upgrade.required_skill)
+	if not visible:
+		return
 	var level := GameState.get_level(upgrade)
 	if upgrade.is_maxed(level):
 		text = "%s (Lv %d)\nMAX" % [upgrade.display_name, level]

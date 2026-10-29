@@ -9,6 +9,7 @@ class_name UpgradeData
 @export var cost_growth: float = 1.15
 @export var effect_per_level: float = 1.0
 @export var max_level: int = 0
+@export var required_skill: SkillNodeData
 #endregion
 #endregion
 

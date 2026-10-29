@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://c1fulq17puwt3"]
 
 [ext_resource type="Script" uid="uid://kjo0fr48as43" path="res://scripts/ui/galaxy_screen.gd" id="1_np6nu"]
+[ext_resource type="Script" uid="uid://bxac4o5y03s1k" path="res://scripts/ui/skill_tree.gd" id="2_y8wt7"]
+[ext_resource type="PackedScene" uid="uid://bv71v8vv5llp" path="res://scenes/ui/skill_pip.tscn" id="3_e43w8"]
+[ext_resource type="Resource" uid="uid://b3adompjf0v7b" path="res://resources/skills/clicker_drone.tres" id="4_l737n"]
+[ext_resource type="Resource" uid="uid://do8u4u2c6frx0" path="res://resources/skills/splash_damage.tres" id="5_05byw"]
+[ext_resource type="Resource" uid="uid://doijw3beoxenx" path="res://resources/skills/gold_cubes.tres" id="6_yjqyk"]
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="7_gt6k6"]
+[ext_resource type="Resource" uid="uid://rwd6pyq1ha73" path="res://resources/skills/drone_splash.tres" id="8_bcj47"]
+[ext_resource type="Resource" uid="uid://usrf674ee6wm" path="res://resources/skills/gold_explode.tres" id="9_1yc81"]
 
 [node name="GalaxyScreen" type="Control" unique_id=1617890461]
 layout_mode = 3
@@ -19,6 +27,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06735597, 4.7077892e-06, 0.06735519, 1)
+
+[node name="SkillTree" type="Control" parent="." unique_id=1141269167]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_y8wt7")
+
+[node name="DronePip" parent="SkillTree" unique_id=1717460691 instance=ExtResource("3_e43w8")]
+layout_mode = 0
+offset_left = 323.0
+offset_top = 177.0
+offset_right = 453.0
+offset_bottom = 227.0
+skill = ExtResource("4_l737n")
+
+[node name="SplashPip" parent="SkillTree" unique_id=674229285 instance=ExtResource("3_e43w8")]
+layout_mode = 0
+offset_left = 887.0
+offset_top = 86.0
+offset_right = 1017.0
+offset_bottom = 136.0
+skill = ExtResource("5_05byw")
+
+[node name="GoldPip" parent="SkillTree" unique_id=1085610602 instance=ExtResource("3_e43w8")]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 510.0
+offset_right = 664.0
+offset_bottom = 560.0
+skill = ExtResource("6_yjqyk")
+
+[node name="TNTPip" parent="SkillTree" unique_id=227723733 instance=ExtResource("3_e43w8")]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 199.0
+offset_right = 839.0
+offset_bottom = 249.0
+skill = ExtResource("7_gt6k6")
+
+[node name="DroneSplashPip" parent="SkillTree" unique_id=1261396997 instance=ExtResource("3_e43w8")]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 70.0
+offset_right = 645.0
+offset_bottom = 120.0
+skill = ExtResource("8_bcj47")
+
+[node name="GoldTNTPip" parent="SkillTree" unique_id=1472685683 instance=ExtResource("3_e43w8")]
+layout_mode = 0
+offset_left = 793.0
+offset_top = 407.0
+offset_right = 923.0
+offset_bottom = 457.0
+skill = ExtResource("9_1yc81")
 
 [node name="BlackHoleButton" type="Button" parent="." unique_id=1529861869]
 custom_minimum_size = Vector2(120, 120)

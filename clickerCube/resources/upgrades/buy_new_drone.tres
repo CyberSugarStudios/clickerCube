@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://bqtgnq3g0k7yn"]
+
+[ext_resource type="Resource" uid="uid://b3adompjf0v7b" path="res://resources/skills/clicker_drone.tres" id="1_rtfn1"]
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_thyxr"]
+
+[resource]
+script = ExtResource("1_thyxr")
+id = &"buy_new_drone"
+display_name = "Buy Drone"
+base_cost = 100.0
+required_skill = ExtResource("1_rtfn1")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

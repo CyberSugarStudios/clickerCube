@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillNodeData" format=3 uid="uid://rwd6pyq1ha73"]
+
+[ext_resource type="Script" uid="uid://cl8wswtdujur6" path="res://scripts/data/skill_node_data.gd" id="1_fc65n"]
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="2_dx6dy"]
+[ext_resource type="Resource" uid="uid://do8u4u2c6frx0" path="res://resources/skills/splash_damage.tres" id="3_s0dvn"]
+[ext_resource type="Resource" uid="uid://b3adompjf0v7b" path="res://resources/skills/clicker_drone.tres" id="4_2one0"]
+
+[resource]
+script = ExtResource("1_fc65n")
+id = &"drone_splash"
+display_name = "Explosive Drones"
+description = "Your Drones click rate is decreased, but they deal damage to all surrounding  blocks."
+cost = 4
+prereqs = Array[ExtResource("1_fc65n")]([ExtResource("2_dx6dy"), ExtResource("3_s0dvn"), ExtResource("4_2one0")])
+metadata/_custom_type_script = "uid://cl8wswtdujur6"

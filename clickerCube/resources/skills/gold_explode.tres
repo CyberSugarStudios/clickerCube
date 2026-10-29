@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillNodeData" format=3 uid="uid://usrf674ee6wm"]
+
+[ext_resource type="Script" uid="uid://cl8wswtdujur6" path="res://scripts/data/skill_node_data.gd" id="1_uvg34"]
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="2_vty4o"]
+[ext_resource type="Resource" uid="uid://doijw3beoxenx" path="res://resources/skills/gold_cubes.tres" id="3_xuu1w"]
+
+[resource]
+script = ExtResource("1_uvg34")
+id = &"gold_explode"
+display_name = "Golden Bursts"
+description = "Golden Blocks can now also be chained with Explosive Blocks, granting increased gold on breaks."
+cost = 5
+prereqs = Array[ExtResource("1_uvg34")]([ExtResource("2_vty4o"), ExtResource("3_xuu1w")])
+metadata/_custom_type_script = "uid://cl8wswtdujur6"

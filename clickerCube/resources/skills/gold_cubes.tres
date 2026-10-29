@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillNodeData" format=3 uid="uid://doijw3beoxenx"]
+
+[ext_resource type="Script" uid="uid://cl8wswtdujur6" path="res://scripts/data/skill_node_data.gd" id="1_7o6n8"]
+
+[resource]
+script = ExtResource("1_7o6n8")
+id = &"gold_cubes"
+display_name = "Golden Cubes"
+description = "Adds a small chance that a Cube will spawn in as a Golden Cube.
+
+Golden Cubes are harder to break, but reward significantly more gold."
+cost = 2
+metadata/_custom_type_script = "uid://cl8wswtdujur6"
