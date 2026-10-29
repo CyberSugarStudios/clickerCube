@@ -10,9 +10,12 @@ const CUBE_SPACING: float = 1.05
 var grid_size: int = 1
 var active_layer: int = 0
 var shells: Array[Array] = []
+var camera_tween: Tween
 
 #region - EXPORT VARS
 @export var camera: Camera3D
+@export var hp_growth_per_depth: float = 2.0
+@export var gold_growth_per_depth: float = 1.5
 #endregion
 #endregion
 #endregion
@@ -21,10 +24,21 @@ var shells: Array[Array] = []
 func _ready() -> void:
 	build_grid(grid_size)
 
-func spawn_cube(grid_pos: Vector3i, cube_layer: int) -> void:
+func zoom_camera_to(visible_size: int) -> void:
+	if camera == null:
+		return
+	if camera_tween:
+		camera_tween.kill()
+	var target_z := visible_size * 1.6 + 1.0
+	camera_tween = create_tween()
+	camera_tween.tween_property(camera, "position:z", target_z, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	var cube := CUBE_SCENE.instantiate() as Cube
 	cube.position = Vector3(grid_pos) * CUBE_SPACING
 	cube.layer = cube_layer
+	cube.max_hp *= pow(hp_growth_per_depth, depth)
+	cube.gold_reward *= pow(gold_growth_per_depth, depth)
 	cube.broken.connect(_on_cube_broken.bind(cube))
 	add_child(cube)
 	cube.set_locked(cube_layer != active_layer)
@@ -42,11 +56,9 @@ func build_grid(size: int) -> void:
 		for y in range(-half, half + 1):
 			for z in range(-half, half + 1):
 				var cube_layer := maxi(absi(x), maxi(absi(y), absi(z)))
-				spawn_cube(Vector3i(x, y, z), cube_layer)
+				spawn_cube(Vector3i(x, y, z), cube_layer, half - cube_layer)
 	
-	if camera:
-		var target_z := size * 1.6 + 1.0
-		create_tween().tween_property(camera, "position:z", target_z, 0.6)
+	zoom_camera_to(size)
 
 func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	GameState.add_gold(gold_reward)
@@ -62,3 +74,4 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	else:
 		for inner_cube: Cube in shells[active_layer]:
 			inner_cube.set_locked(false)
+		zoom_camera_to(active_layer * 2 + 1)

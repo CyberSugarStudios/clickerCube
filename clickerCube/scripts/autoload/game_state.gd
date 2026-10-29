@@ -7,7 +7,7 @@ signal upgrades_changed
 #region - CONSTS
 const BASE_CLICK_DAMAGE: float = 1.0
 const BASE_CRIT_CHANCE: float = 0.05
-const BASE_CRIT_MULT: float = 2
+const BASE_CRIT_MULT: float = 2.0
 
 const CLICK_DAMAGE_UPGRADE: UpgradeData = preload("res://resources/upgrades/click_damage.tres")
 const CRIT_CHANCE_UPGRADE: UpgradeData = preload("res://resources/upgrades/crit_chance.tres")
@@ -37,9 +37,12 @@ func get_level(upgrade: UpgradeData) -> int:
 	return upgrade_levels.get(upgrade.id, 0)
 
 func recalc_stats() -> void:
-	click_damage = BASE_CLICK_DAMAGE + get_level(CLICK_DAMAGE_UPGRADE)
-	crit_chance = BASE_CRIT_CHANCE + get_level(CRIT_CHANCE_UPGRADE)
-	crit_mult = BASE_CRIT_MULT + get_level(CRIT_MULT_UPGRADE)
+	click_damage = BASE_CLICK_DAMAGE + get_level(CLICK_DAMAGE_UPGRADE) * CLICK_DAMAGE_UPGRADE.effect_per_level
+	crit_chance = BASE_CRIT_CHANCE + get_level(CRIT_CHANCE_UPGRADE) * CRIT_CHANCE_UPGRADE.effect_per_level
+	crit_mult = BASE_CRIT_MULT + get_level(CRIT_MULT_UPGRADE) * CRIT_MULT_UPGRADE.effect_per_level
+
+func _ready() -> void:
+	recalc_stats()
 
 func try_buy(upgrade: UpgradeData) -> bool:
 	var level := get_level(upgrade)
