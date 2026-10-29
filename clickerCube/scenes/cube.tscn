@@ -14,5 +14,3 @@ locked_material = ExtResource("2_0d7ej")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=849457780]
 shape = SubResource("BoxShape3D_53m36")
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]

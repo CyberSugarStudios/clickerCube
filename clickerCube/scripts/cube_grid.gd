@@ -62,12 +62,3 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	else:
 		for inner_cube: Cube in shells[active_layer]:
 			inner_cube.set_locked(false)
-
-#region - TEMP
-@export var auto_spin: bool = true
-
-func _process(delta: float) -> void:
-	if auto_spin:
-		rotate_y(delta * 0.3)
-		rotate_x(delta * 0.2)
-#endregion

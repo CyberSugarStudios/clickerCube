@@ -19,7 +19,7 @@ var is_locked: bool = false
 
 #region - ONREADY VARS
 @onready var model: Node3D = $Model
-@onready var  mesh: MeshInstance3D = $Model/Cube
+@onready var mesh: MeshInstance3D = $Model/Cube
 #endregion
 #endregion
 #endregion
@@ -62,8 +62,3 @@ func kill_cube() -> void:
 	scale_tween = create_tween()
 	scale_tween.tween_property(model, "scale", Vector3.ZERO, 0.15)
 	scale_tween.tween_callback(queue_free)
-
-func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		var damage := GameState.get_click_damage()
-		take_damage(damage)
