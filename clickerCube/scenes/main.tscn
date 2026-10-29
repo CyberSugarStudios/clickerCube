@@ -7,6 +7,8 @@
 [ext_resource type="Resource" uid="uid://cx2pbf1w3fagp" path="res://resources/upgrades/click_damage.tres" id="4_o6xl0"]
 [ext_resource type="Resource" uid="uid://ckyvyfos60h24" path="res://resources/upgrades/crit_chance.tres" id="5_tipki"]
 [ext_resource type="Resource" uid="uid://brbbfrqcrlrsy" path="res://resources/upgrades/crit_mult.tres" id="6_85g3d"]
+[ext_resource type="Script" uid="uid://cugv1lg0bijqd" path="res://scripts/ui/galaxy_button.gd" id="7_85g3d"]
+[ext_resource type="PackedScene" uid="uid://c1fulq17puwt3" path="res://scenes/ui/galaxy_screen.tscn" id="7_tipki"]
 
 [sub_resource type="Environment" id="Environment_8viuf"]
 background_mode = 1
@@ -49,17 +51,35 @@ grow_vertical = 2
 [node name="UpgradeList" type="VBoxContainer" parent="UI/ShopPanel" unique_id=978731285]
 layout_mode = 2
 
-[node name="UpgradeButton" parent="UI/ShopPanel/UpgradeList" unique_id=1140706275 instance=ExtResource("3_jyhfs")]
+[node name="ClickDamageButton" parent="UI/ShopPanel/UpgradeList" unique_id=1140706275 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("4_o6xl0")
 
-[node name="UpgradeButton2" parent="UI/ShopPanel/UpgradeList" unique_id=464859243 instance=ExtResource("3_jyhfs")]
+[node name="CritChanceButton" parent="UI/ShopPanel/UpgradeList" unique_id=464859243 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("5_tipki")
 
-[node name="UpgradeButton3" parent="UI/ShopPanel/UpgradeList" unique_id=1462302245 instance=ExtResource("3_jyhfs")]
+[node name="CritMultButton" parent="UI/ShopPanel/UpgradeList" unique_id=1462302245 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("6_85g3d")
+
+[node name="GalaxyButton" type="Button" parent="UI" unique_id=389994211 node_paths=PackedStringArray("galaxy_screen")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_85g3d")
+galaxy_screen = NodePath("../GalaxyScreen")
+
+[node name="GalaxyScreen" parent="UI" unique_id=1617890461 instance=ExtResource("7_tipki")]
+visible = false
 
 [node name="GridControls" type="Node" parent="." unique_id=523963857 node_paths=PackedStringArray("camera", "grid")]
 script = ExtResource("3_sugp2")
