@@ -3,6 +3,9 @@ extends Node
 #region - INIT
 signal gold_changed(new_amount: float)
 signal upgrades_changed
+signal core_shards_changed(new_amount: int)
+signal run_completed(shards_earned: int)
+signal run_started
 
 #region - CONSTS
 const BASE_CLICK_DAMAGE: float = 1.0
@@ -21,7 +24,24 @@ var gold: float = 0.0
 var click_damage: float = 1.0
 var crit_chance: float = 0.05
 var crit_mult: float = 2.0
+
+var core_shards: int = 0
+var run_number: int = 1
 #endregion
+#endregion
+
+#region - GAMEPLAY LOOP
+func get_max_grid_size() -> int:
+	return run_number * 2 + 1
+
+func complete_run() -> void:
+	var earned := run_number
+	core_shards += earned
+	core_shards_changed.emit(core_shards)
+
+func start_next_run() -> void:
+	run_number += 1
+	run_started.emit()
 #endregion
 
 func add_gold(amount: float) -> void:

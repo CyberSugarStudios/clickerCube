@@ -33,7 +33,7 @@ func _ready() -> void:
 	cur_hp = max_hp
 
 func set_locked(value: bool) -> void:
-	#set locked cubes so that only the top row can be clicked (later need to implment upgrades so that multiple
+	#set locked cubes so that only the top row can be clicked (later need to implement upgrades so that multiple
 	#layers can be damaged at a time
 	is_locked = value
 	mesh.material_override = locked_material if value else null

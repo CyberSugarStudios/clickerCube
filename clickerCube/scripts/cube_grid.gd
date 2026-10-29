@@ -4,7 +4,7 @@ extends Node3D
 #region - INIT
 #region - CONSTS
 const CUBE_SCENE: PackedScene = preload("res://scenes/cube.tscn")
-const CUBE_SPACING: float = 1
+const CUBE_SPACING: float = 1.0
 
 #region - VARS
 var grid_size: int = 1
@@ -14,7 +14,7 @@ var camera_tween: Tween
 
 #region - EXPORT VARS
 @export var camera: Camera3D
-@export var hp_growth_per_depth: float = 3
+@export var hp_growth_per_depth: float = 3.0
 @export var gold_growth_per_depth: float = 1.5
 #endregion
 #endregion
@@ -23,6 +23,11 @@ var camera_tween: Tween
 
 func _ready() -> void:
 	#initialize the current grid size
+	GameState.run_started.connect(start_run)
+	start_run()
+
+func start_run() -> void:
+	grid_size = 1
 	build_grid(grid_size)
 
 func zoom_camera_to(visible_size: int) -> void:
@@ -75,9 +80,8 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	
 	active_layer -= 1
 	if active_layer < 0:
-		grid_size += 2
-		build_grid(grid_size)
-	else:
-		for inner_cube: Cube in shells[active_layer]:
-			inner_cube.set_locked(false)
-		zoom_camera_to(active_layer * 2 + 1)
+		if grid_size >= GameState.get_max_grid_size():
+			GameState.complete_run()
+		else:
+			grid_size += 2
+			build_grid(grid_size)
