@@ -1,10 +1,10 @@
 extends Node3D
+#the handler for building the grids of cubes needed for the recursion element of the game
 
 #region - INIT
-
 #region - CONSTS
 const CUBE_SCENE: PackedScene = preload("res://scenes/cube.tscn")
-const CUBE_SPACING: float = 1.05
+const CUBE_SPACING: float = 1
 
 #region - VARS
 var grid_size: int = 1
@@ -14,7 +14,7 @@ var camera_tween: Tween
 
 #region - EXPORT VARS
 @export var camera: Camera3D
-@export var hp_growth_per_depth: float = 2.0
+@export var hp_growth_per_depth: float = 3
 @export var gold_growth_per_depth: float = 1.5
 #endregion
 #endregion
@@ -22,9 +22,12 @@ var camera_tween: Tween
 #endregion
 
 func _ready() -> void:
+	#initialize the current grid size
 	build_grid(grid_size)
 
 func zoom_camera_to(visible_size: int) -> void:
+	#adjust the camera depending on the current size of the grid
+		#closer for smaller grids, further away for larger grids
 	if camera == null:
 		return
 	if camera_tween:
@@ -34,6 +37,7 @@ func zoom_camera_to(visible_size: int) -> void:
 	camera_tween.tween_property(camera, "position:z", target_z, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
+	#spawn in the cubes at their correct grid position
 	var cube := CUBE_SCENE.instantiate() as Cube
 	cube.position = Vector3(grid_pos) * CUBE_SPACING
 	cube.layer = cube_layer
@@ -45,6 +49,7 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	shells[cube_layer].append(cube)
 
 func build_grid(size: int) -> void:
+	#grid math
 	@warning_ignore("integer_division")
 	var half: int = size / 2
 	active_layer = half
@@ -61,6 +66,7 @@ func build_grid(size: int) -> void:
 	zoom_camera_to(size)
 
 func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
+	#track broken cubes and grid layers
 	GameState.add_gold(gold_reward)
 	shells[cube.layer].erase(cube)
 	
