@@ -61,8 +61,9 @@ func pick_target() -> void:
 			target = cube
 
 func is_claimed(cube: Cube) -> bool:
-	for other in get_parent().get_children():
-		if other != self and other is Drone and other.target == cube:
+	for child in get_parent().get_children():
+		var other := child as Drone
+		if other and other != self and other.target == cube:
 			return true
 	return false
 
@@ -79,8 +80,9 @@ func move_toward_dir(goal: Vector3, delta: float) -> void:
 		dir = dir.slerp(goal, minf(1.0, move_speed * delta / angle))
 
 func apply_separation(delta: float) -> void:
-	for other in get_parent().get_children():
-		if other == self or not other is Drone:
+	for child in get_parent().get_children():
+		var other := child as Drone
+		if other == null or other == self:
 			continue
 		if dir.angle_to(other.dir) < separation_angle:
 			var push := (dir - other.dir).normalized()
