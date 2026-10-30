@@ -16,7 +16,10 @@
 [ext_resource type="Resource" uid="uid://v1jy4dr61olo" path="res://resources/upgrades/drone_speed.tres" id="9_a8y0u"]
 [ext_resource type="Resource" uid="uid://2pk2y0cw5cc8" path="res://resources/upgrades/gold_cube_chance.tres" id="11_jbj1t"]
 [ext_resource type="Resource" uid="uid://dqj2xcwm6pb1o" path="res://resources/upgrades/gold_cube_payout.tres" id="12_muem4"]
+[ext_resource type="Resource" uid="uid://l1td5jn6hbei" path="res://resources/upgrades/explosion_damage.tres" id="13_dp3eg"]
+[ext_resource type="Resource" uid="uid://b2co3vnb4g0sm" path="res://resources/upgrades/explosive_chance.tres" id="14_0ld40"]
 [ext_resource type="Script" uid="uid://c8ocq76ioa2x0" path="res://scripts/ui/hp_bars.gd" id="14_jkv2x"]
+[ext_resource type="Resource" uid="uid://bpei2jadp3t3q" path="res://resources/upgrades/explosive_radius.tres" id="15_gqmmt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7s8im"]
 
@@ -118,6 +121,18 @@ upgrade = ExtResource("11_jbj1t")
 [node name="GoldCubePayoutButton" parent="UI/ShopPanel/UpgradeList" unique_id=959911806 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("12_muem4")
+
+[node name="ExplosionChanceButton" parent="UI/ShopPanel/UpgradeList" unique_id=1123069929 instance=ExtResource("3_jyhfs")]
+layout_mode = 2
+upgrade = ExtResource("14_0ld40")
+
+[node name="ExplosionDamageButton" parent="UI/ShopPanel/UpgradeList" unique_id=1584084506 instance=ExtResource("3_jyhfs")]
+layout_mode = 2
+upgrade = ExtResource("13_dp3eg")
+
+[node name="ExplosionRadiusButton" parent="UI/ShopPanel/UpgradeList" unique_id=1382286521 instance=ExtResource("3_jyhfs")]
+layout_mode = 2
+upgrade = ExtResource("15_gqmmt")
 
 [node name="DamageNumbers" type="Control" parent="UI" unique_id=1186795548 node_paths=PackedStringArray("camera")]
 layout_mode = 3

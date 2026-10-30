@@ -71,8 +71,8 @@ func roll_cube_type(cube: Cube) -> void:
 	var old_max := cube.max_hp
 	cube.cube_type = chosen
 	cube.max_hp *= chosen.hp_mult
-	cube.cur_hp = chosen.max_hp
-	cube.gold_reward += chosen.gold_mult
+	cube.cur_hp = cube.max_hp
+	cube.gold_reward *= chosen.gold_mult
 	var extra := cube.max_hp - old_max
 	total_hp += extra
 	total_max_hp += extra

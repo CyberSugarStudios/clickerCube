@@ -129,7 +129,7 @@ func recalc_stats() -> void:
 	
 	explosive_chance = BASE_EXPLOSIVE_CHANCE + get_level(EXPLOSIVE_CHANCE_UPGRADE) * EXPLOSIVE_CHANCE_UPGRADE.effect_per_level
 	explosion_damage_mult = BASE_EXPLOSION_DAMAGE_MULT + get_level(EXPLOSIVE_DAMAGE_UPGRADE) * EXPLOSIVE_DAMAGE_UPGRADE.effect_per_level
-	explosion_radius = BASE_EXPLOSION_RADIUS + get_level(EXPLOSIVE_RADIUS_UPGRADE) * EXPLOSIVE_RADIUS_UPGRADE.effect_per_level
+	explosion_radius = BASE_EXPLOSION_RADIUS + int(get_level(EXPLOSIVE_RADIUS_UPGRADE) * EXPLOSIVE_RADIUS_UPGRADE.effect_per_level)
 
 func _ready() -> void:
 	recalc_stats()
