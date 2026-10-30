@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://dqj2xcwm6pb1o"]
+
+[ext_resource type="Resource" uid="uid://doijw3beoxenx" path="res://resources/skills/gold_cubes.tres" id="1_ci570"]
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_yvap2"]
+
+[resource]
+script = ExtResource("1_yvap2")
+id = &"gold_cube_payout"
+display_name = "Gold From Golden Cubes"
+base_cost = 300.0
+cost_growth = 1.35
+required_skill = ExtResource("1_ci570")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

@@ -23,6 +23,12 @@ const BUY_DRONE_UPGRADE: UpgradeData = preload("res://resources/upgrades/buy_new
 const DRONE_DAMAGE_UPGRADE: UpgradeData = preload("res://resources/upgrades/drone_damage.tres")
 const BASE_DRONE_CLICK_INTERVAL: float = 2.0
 const DRONE_SPEED_UPGRADE: UpgradeData = preload("res://resources/upgrades/drone_speed.tres")
+
+const BASE_GOLD_CUBE_CHANCE: float = 0.03
+const GOLD_CUBE_SKILL: SkillNodeData = preload("res://resources/skills/gold_cubes.tres")
+const GOLDEN_TYPE: CubeTypeData = preload("res://resources/cube_types/golden.tres")
+const GOLD_CHANCE_UPGRADE: UpgradeData = preload("res://resources/upgrades/gold_cube_chance.tres")
+const GOLD_PAYOUT_UPGRADE: UpgradeData = preload("res://resources/upgrades/gold_cube_payout.tres")
 #endregion
 
 #region - VARS
@@ -40,6 +46,9 @@ var unlocked_skills: Array[StringName] = []
 
 var drone_damage_mult: float = BASE_DRONE_DAMAGE_MULT
 var drone_click_interval: float = BASE_DRONE_CLICK_INTERVAL
+
+var gold_cube_chance: float = BASE_GOLD_CUBE_CHANCE
+var gold_payout_bonus: float = 0.0
 #endregion
 #endregion
 
@@ -100,6 +109,8 @@ func recalc_stats() -> void:
 	crit_mult = BASE_CRIT_MULT + get_level(CRIT_MULT_UPGRADE) * CRIT_MULT_UPGRADE.effect_per_level
 	drone_damage_mult = BASE_DRONE_DAMAGE_MULT + get_level(DRONE_DAMAGE_UPGRADE) * DRONE_DAMAGE_UPGRADE.effect_per_level
 	drone_click_interval = BASE_DRONE_CLICK_INTERVAL / (1.0 + get_level(DRONE_SPEED_UPGRADE) * DRONE_SPEED_UPGRADE.effect_per_level)
+	gold_cube_chance = BASE_GOLD_CUBE_CHANCE + get_level(GOLD_CHANCE_UPGRADE) * GOLD_CHANCE_UPGRADE.effect_per_level
+	gold_payout_bonus = get_level(GOLD_PAYOUT_UPGRADE) * GOLD_PAYOUT_UPGRADE.effect_per_level
 
 func _ready() -> void:
 	recalc_stats()

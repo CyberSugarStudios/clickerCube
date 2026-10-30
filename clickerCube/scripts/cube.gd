@@ -12,6 +12,7 @@ var cur_hp: float
 var scale_tween: Tween
 var layer: int = 0
 var is_locked: bool = false
+var cube_type: CubeTypeData
 
 #region - EXPORT VARS
 @export var max_hp: float = 10
@@ -37,7 +38,11 @@ func set_locked(value: bool) -> void:
 	#set locked cubes so that only the top row can be clicked (later need to implement upgrades so that multiple
 	#layers can be damaged at a time
 	is_locked = value
-	mesh.material_override = locked_material if value else null
+	mesh.material_override = null
+	if value:
+		mesh.material_override = locked_material
+	elif cube_type:
+		mesh.material_override = cube_type.material
 
 func take_damage(amount: float) -> bool:
 	#the cube takes damage unless it is already broken

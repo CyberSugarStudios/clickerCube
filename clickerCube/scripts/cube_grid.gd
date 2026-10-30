@@ -57,6 +57,11 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	cube.layer = cube_layer
 	cube.max_hp *= pow(hp_growth_per_depth, depth)
 	cube.gold_reward *= pow(gold_growth_per_depth, depth)
+	if depth >= 1 and GameState.has_skill(GameState.GOLD_CUBE_SKILL) and randf() < GameState.gold_cube_chance:
+		cube.cube_type = GameState.GOLDEN_TYPE
+	if cube.cube_type:
+		cube.max_hp *= cube.cube_type.hp_mult
+		cube.gold_reward *= cube.cube_type.gold_mult
 	total_hp += cube.max_hp
 	total_max_hp += cube.max_hp
 	layer_hp[cube_layer] += cube.max_hp
@@ -75,13 +80,13 @@ func build_grid(size: int) -> void:
 	shells.clear()
 	for i in range(half + 1):
 		shells.append([])
-		total_hp = 0.0
-		total_max_hp = 0.0
-		layer_hp.resize(half + 1)
-		layer_hp.fill(0.0)
-		layer_max_hp.resize(half + 1)
-		layer_max_hp.fill(0.0)
-		player_target = null
+	total_hp = 0.0
+	total_max_hp = 0.0
+	layer_hp.resize(half + 1)
+	layer_hp.fill(0.0)
+	layer_max_hp.resize(half + 1)
+	layer_max_hp.fill(0.0)
+	player_target = null
 	
 	for x in range(-half, half + 1):
 		for y in range(-half, half + 1):
@@ -99,7 +104,10 @@ func _on_cube_damaged(amount: float, cube: Cube) -> void:
 
 func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	#track broken cubes and grid layers
-	GameState.add_gold(gold_reward)
+	var payout := gold_reward
+	if cube.cube_type == GameState.GOLDEN_TYPE:
+		payout *= 1.0 + GameState.gold_payout_bonus / GameState.GOLDEN_TYPE.gold_mult
+	GameState.add_gold(payout)
 	shells[cube.layer].erase(cube)
 	
 	if not shells[active_layer].is_empty():
