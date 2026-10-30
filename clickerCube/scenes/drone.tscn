@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drkd3q5ebon1k"]
+
+[ext_resource type="PackedScene" uid="uid://dtjr5ylrxp2kd" path="res://assets/models/clickerDrone.glb" id="1_dil0n"]
+[ext_resource type="Script" uid="uid://03qsiwhblwih" path="res://scripts/drone.gd" id="1_knnud"]
+
+[node name="Drone" type="Node3D" unique_id=651813055]
+script = ExtResource("1_knnud")
+
+[node name="Model" parent="." unique_id=1997460696 instance=ExtResource("1_dil0n")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

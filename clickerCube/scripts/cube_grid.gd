@@ -1,4 +1,5 @@
 extends Node3D
+class_name CubeGrid
 #the handler for building the grids of cubes needed for the recursion element of the game
 
 #region - INIT
@@ -89,3 +90,13 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 		for inner_cube: Cube in shells[active_layer]:
 			inner_cube.set_locked(false)
 		zoom_camera_to(active_layer * 2 + 1)
+
+#region - DRONE CODE
+func get_active_cubes() -> Array:
+	if active_layer < 0 or shells.is_empty():
+		return []
+	return shells[active_layer]
+
+func get_visible_size() -> int:
+	return maxi(active_layer, 0) * 2 + 1
+#endregion
