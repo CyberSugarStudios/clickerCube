@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://v1jy4dr61olo"]
+
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_kdjxd"]
+[ext_resource type="Resource" uid="uid://b3adompjf0v7b" path="res://resources/skills/clicker_drone.tres" id="1_tkail"]
+
+[resource]
+script = ExtResource("1_kdjxd")
+id = &"drone_speed"
+display_name = "Drone Click Rate"
+base_cost = 75.0
+cost_growth = 1.3
+effect_per_level = 0.1
+required_skill = ExtResource("1_tkail")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

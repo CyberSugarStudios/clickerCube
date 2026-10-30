@@ -21,6 +21,8 @@ const BASE_DRONE_DAMAGE_MULT: float = 0.5
 const CLICKER_DRONE_SKILL: SkillNodeData = preload("res://resources/skills/clicker_drone.tres")
 const BUY_DRONE_UPGRADE: UpgradeData = preload("res://resources/upgrades/buy_new_drone.tres")
 const DRONE_DAMAGE_UPGRADE: UpgradeData = preload("res://resources/upgrades/drone_damage.tres")
+const BASE_DRONE_CLICK_INTERVAL: float = 2.0
+const DRONE_SPEED_UPGRADE: UpgradeData = preload("res://resources/upgrades/drone_speed.tres")
 #endregion
 
 #region - VARS
@@ -37,6 +39,7 @@ var run_number: int = 1
 var unlocked_skills: Array[StringName] = []
 
 var drone_damage_mult: float = BASE_DRONE_DAMAGE_MULT
+var drone_click_interval: float = BASE_DRONE_CLICK_INTERVAL
 #endregion
 #endregion
 
@@ -96,6 +99,7 @@ func recalc_stats() -> void:
 	crit_chance = BASE_CRIT_CHANCE + get_level(CRIT_CHANCE_UPGRADE) * CRIT_CHANCE_UPGRADE.effect_per_level
 	crit_mult = BASE_CRIT_MULT + get_level(CRIT_MULT_UPGRADE) * CRIT_MULT_UPGRADE.effect_per_level
 	drone_damage_mult = BASE_DRONE_DAMAGE_MULT + get_level(DRONE_DAMAGE_UPGRADE) * DRONE_DAMAGE_UPGRADE.effect_per_level
+	drone_click_interval = BASE_DRONE_CLICK_INTERVAL / (1.0 + get_level(DRONE_SPEED_UPGRADE) * DRONE_SPEED_UPGRADE.effect_per_level)
 
 func _ready() -> void:
 	recalc_stats()
@@ -122,6 +126,6 @@ func get_drone_count() -> int:
 		return 0
 	return 1 + get_level(BUY_DRONE_UPGRADE)
 
-func get_drone_damage(is_crit: bool) -> float:
-	return get_click_damage(is_crit) * drone_damage_mult
+func get_drone_damage() -> float:
+	return click_damage * drone_damage_mult
 #endregion

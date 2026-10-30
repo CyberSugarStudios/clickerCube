@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://dv4b3vha2g54i" path="res://resources/upgrades/drone_damage.tres" id="7_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://c1fulq17puwt3" path="res://scenes/ui/galaxy_screen.tscn" id="7_tipki"]
 [ext_resource type="Resource" uid="uid://bqtgnq3g0k7yn" path="res://resources/upgrades/buy_new_drone.tres" id="8_trceg"]
+[ext_resource type="Resource" uid="uid://v1jy4dr61olo" path="res://resources/upgrades/drone_speed.tres" id="9_a8y0u"]
 
 [sub_resource type="Environment" id="Environment_8viuf"]
 background_mode = 1
@@ -82,6 +83,10 @@ upgrade = ExtResource("6_85g3d")
 [node name="DroneDamageButton" parent="UI/ShopPanel/UpgradeList" unique_id=988456290 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("7_eb6dy")
+
+[node name="DroneClickSpeedButton" parent="UI/ShopPanel/UpgradeList" unique_id=1256206762 instance=ExtResource("3_jyhfs")]
+layout_mode = 2
+upgrade = ExtResource("9_a8y0u")
 
 [node name="NewDroneButton" parent="UI/ShopPanel/UpgradeList" unique_id=1527565188 instance=ExtResource("3_jyhfs")]
 layout_mode = 2

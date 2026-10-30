@@ -8,6 +8,6 @@ script = ExtResource("1_b2tae")
 id = &"drone_damage"
 display_name = "Drone Damage"
 base_cost = 50.0
-effect_per_level = 0.1
+effect_per_level = 0.01
 required_skill = ExtResource("1_r3di3")
 metadata/_custom_type_script = "uid://bq12hl8w5hnj5"
