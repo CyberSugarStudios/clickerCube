@@ -7,8 +7,9 @@ class_name Drone
 @export var orbit_margin: float = 1.0
 @export var attack_angle: float = 0.15
 @export var separation_angle: float = 0.35
-@export var separation_strength: float = 2.0
+@export var separation_strength: float = 1.0
 @export var radius_smoothing: float = 5.0
+@export var core_margin: float = 2.0
 #endregion
 
 var grid: CubeGrid
@@ -27,23 +28,35 @@ func _ready() -> void:
 	click_timer = randf() * GameState.drone_click_interval
 
 func _process(delta: float) -> void:
-	var goal_radius := grid.get_visible_size() * (sqrt(3) / 2) + orbit_margin
-	radius = lerpf(radius, goal_radius, 1.0 - exp(-radius_smoothing * delta))
-	
 	if not has_valid_target():
 		pick_target()
-	
-	var hover := Vector3.ZERO
-	if target:
-		hover = get_hover_dir(target)
+
+	var on_core := target != null and is_core(target)
+	radius = lerpf(radius, get_goal_radius(on_core), 1.0 - exp(-radius_smoothing * delta))
+
+	var arrived := on_core
+	if target and not on_core:
+		var hover := get_hover_dir(target)
 		move_toward_dir(hover, delta)
-	
-	apply_separation(delta)
+		arrived = dir.angle_to(hover) < attack_angle
+
+	if not arrived:
+		apply_separation(delta)
+
 	position = dir * radius
 	face(target.global_position if target else grid.global_position)
-	
-	if target and dir.angle_to(hover) < attack_angle:
+
+	if target and arrived:
 		tick_click(delta)
+
+func is_core(cube: Cube) -> bool:
+	return cube.position.length() < 0.01
+
+func get_goal_radius(one_core: bool) -> float:
+	if one_core:
+		var camera := get_viewport().get_camera_3d()
+		return camera.global_position.distance_to(grid.global_position) + core_margin
+	return grid.get_visible_size() * (sqrt(3) / 2) + orbit_margin
 
 func has_valid_target() -> bool:
 	return is_instance_valid(target) and not target.is_broken and not target.is_locked
@@ -68,10 +81,8 @@ func is_claimed(cube: Cube) -> bool:
 	return false
 
 func get_hover_dir(cube: Cube) -> Vector3:
-	if cube.position.length() < 0.01:
-		var camera := get_viewport().get_camera_3d()
-		var away_from_camera := -grid.to_local(camera.global_position).normalized()
-		return (away_from_camera + core_offset).normalized()
+	if is_core(cube):
+		return dir
 	return cube.position.normalized()
 
 func move_toward_dir(goal: Vector3, delta: float) -> void:
@@ -84,9 +95,11 @@ func apply_separation(delta: float) -> void:
 		var other := child as Drone
 		if other == null or other == self:
 			continue
-		if dir.angle_to(other.dir) < separation_angle:
+		var gap := dir.angle_to(other.dir)
+		if gap < separation_angle:
 			var push := (dir - other.dir).normalized()
-			dir = (dir + push * separation_strength * delta).normalized()
+			var strength := separation_strength * (1.0 - gap / separation_angle)
+			dir = (dir + push * strength * delta).normalized()
 
 func face(world_point: Vector3) -> void:
 	var look_dir := (world_point - global_position).normalized()
