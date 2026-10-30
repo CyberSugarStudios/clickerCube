@@ -73,9 +73,6 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	cube.layer = cube_layer
 	cube.max_hp *= pow(hp_growth_per_depth, depth)
 	cube.gold_reward *= pow(gold_growth_per_depth, depth)
-	if cube_layer == active_layer:
-		roll_cube_type(cube)
-	cube.set_locked(cube_layer != active_layer)
 	total_hp += cube.max_hp
 	total_max_hp += cube.max_hp
 	layer_hp[cube_layer] += cube.max_hp
@@ -83,6 +80,8 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	cube.damaged.connect(_on_cube_damaged.bind(cube))
 	cube.broken.connect(_on_cube_broken.bind(cube))
 	add_child(cube)
+	if cube_layer == active_layer:
+		roll_cube_type(cube)
 	cube.set_locked(cube_layer != active_layer)
 	shells[cube_layer].append(cube)
 
