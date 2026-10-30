@@ -50,6 +50,22 @@ func zoom_camera_to(visible_size: int) -> void:
 	camera_tween = create_tween()
 	camera_tween.tween_property(camera, "position:z", target_z, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+func roll_cube_type(cube: Cube) -> void:
+	if not GameState.has_skill(GameState.GOLD_CUBE_SKILL):
+		return
+	if randf() >= GameState.gold_cube_chance:
+		return
+	var old_max := cube.max_hp
+	cube.cube_type = GameState.GOLDEN_TYPE
+	cube.max_hp *= cube.cube_type.hp_mult
+	cube.cur_hp = cube.max_hp
+	cube.gold_reward *= cube.cube_type.gold_mult
+	var extra := cube.max_hp - old_max
+	total_hp += extra
+	total_max_hp += extra
+	layer_hp[cube.layer] += extra
+	layer_max_hp[cube.layer] += extra
+
 func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	#spawn in the cubes at their correct grid position
 	var cube := CUBE_SCENE.instantiate() as Cube
@@ -57,11 +73,9 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	cube.layer = cube_layer
 	cube.max_hp *= pow(hp_growth_per_depth, depth)
 	cube.gold_reward *= pow(gold_growth_per_depth, depth)
-	if depth >= 1 and GameState.has_skill(GameState.GOLD_CUBE_SKILL) and randf() < GameState.gold_cube_chance:
-		cube.cube_type = GameState.GOLDEN_TYPE
-	if cube.cube_type:
-		cube.max_hp *= cube.cube_type.hp_mult
-		cube.gold_reward *= cube.cube_type.gold_mult
+	if cube_layer == active_layer:
+		roll_cube_type(cube)
+	cube.set_locked(cube_layer != active_layer)
 	total_hp += cube.max_hp
 	total_max_hp += cube.max_hp
 	layer_hp[cube_layer] += cube.max_hp
@@ -113,8 +127,12 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	if not shells[active_layer].is_empty():
 		return
 	
+	layer_hp[active_layer] = 0.0
+	
 	active_layer -= 1
 	if active_layer < 0:
+		total_hp = 0.0
+		hp_changed.emit()
 		if grid_size >= GameState.get_max_grid_size():
 			GameState.complete_run()
 		else:
@@ -122,6 +140,7 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 			build_grid(grid_size)
 	else:
 		for inner_cube: Cube in shells[active_layer]:
+			roll_cube_type(inner_cube)
 			inner_cube.set_locked(false)
 		zoom_camera_to(active_layer * 2 + 1)
 		hp_changed.emit()
