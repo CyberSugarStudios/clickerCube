@@ -4,6 +4,7 @@ class_name Cube
 
 #region - INIT
 signal broken(gold_reward: float)
+signal damaged(amount: float)
 
 #region - VARS
 var is_broken: bool = false
@@ -45,7 +46,9 @@ func take_damage(amount: float) -> bool:
 	if is_locked:
 		#play clink locked sound
 		return false
+	var applied := minf(amount, cur_hp)
 	cur_hp -= amount
+	damaged.emit(applied)
 	play_hit_squash()
 	if cur_hp <= 0:
 		kill_cube()

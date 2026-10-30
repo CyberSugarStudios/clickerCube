@@ -4,7 +4,7 @@ extends Node
 
 #region - EXPORT VARS
 @export var camera: Camera3D
-@export var grid: Node3D
+@export var grid: CubeGrid
 @export var drag_threshold: float = 20.0
 @export var quick_drag_threshold: float = 80.0
 @export var quick_tap_time: float = 0.10
@@ -77,6 +77,8 @@ func hit_cube_at(screen_pos: Vector2) -> void:
 	var cube := result.collider as Cube
 	if cube == null:
 		return
+	if not cube.is_locked:
+		grid.player_target = cube
 	var is_crit := GameState.roll_crit()
 	var damage := GameState.get_click_damage(is_crit)
 	if cube.take_damage(damage) and damage_numbers:

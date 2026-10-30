@@ -52,8 +52,8 @@ func _process(delta: float) -> void:
 func is_core(cube: Cube) -> bool:
 	return cube.position.length() < 0.01
 
-func get_goal_radius(one_core: bool) -> float:
-	if one_core:
+func get_goal_radius(on_core: bool) -> float:
+	if on_core:
 		var camera := get_viewport().get_camera_3d()
 		return camera.global_position.distance_to(grid.global_position) + core_margin
 	return grid.get_visible_size() * (sqrt(3) / 2) + orbit_margin
