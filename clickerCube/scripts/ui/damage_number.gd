@@ -6,7 +6,7 @@ class_name DamageNumber
 @export var fade_time: float = 0.2
 
 func setup(amount: float, screen_pos: Vector2, is_crit: bool) -> void:
-	text = String.num(amount, 1)
+	text = NumFormat.short(amount)
 	var jitter := Vector2(randf_range(-15.0, 15.0), 0.0)
 	position = screen_pos - custom_minimum_size / 2.0 + jitter
 	if is_crit:

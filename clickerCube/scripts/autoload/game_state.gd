@@ -24,7 +24,7 @@ const DRONE_DAMAGE_UPGRADE: UpgradeData = preload("res://resources/upgrades/dron
 const BASE_DRONE_CLICK_INTERVAL: float = 2.0
 const DRONE_SPEED_UPGRADE: UpgradeData = preload("res://resources/upgrades/drone_speed.tres")
 
-const BASE_GOLD_CUBE_CHANCE: float = 0.03
+const BASE_GOLD_CUBE_CHANCE: float = 0.015
 const GOLD_CUBE_SKILL: SkillNodeData = preload("res://resources/skills/gold_cubes.tres")
 const GOLDEN_TYPE: CubeTypeData = preload("res://resources/cube_types/golden.tres")
 const GOLD_CHANCE_UPGRADE: UpgradeData = preload("res://resources/upgrades/gold_cube_chance.tres")

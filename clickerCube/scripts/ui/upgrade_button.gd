@@ -19,7 +19,7 @@ func refresh() -> void:
 		disabled = true
 		return
 	var cost := upgrade.get_cost(level)
-	text = "%s (Lv %d)\nCost: %d" % [upgrade.display_name, level, cost]
+	text = "%s (Lv %d)\nCost: %s" % [upgrade.display_name, level, NumFormat.short(cost)]
 	disabled = GameState.gold < cost
 
 func _on_pressed() -> void:

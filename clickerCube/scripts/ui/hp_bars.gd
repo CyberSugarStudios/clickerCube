@@ -23,4 +23,4 @@ func set_bar(bar: ProgressBar, label_name: String, value: float, max_value: floa
 	bar.max_value = maxf(max_value, 1.0)
 	bar.value = value
 	var label := bar.get_node("Text") as Label
-	label.text = "%s: %d / %d" % [label_name, ceilf(value), max_value]
+	label.text = "%s: %s / %s" % [label_name, NumFormat.short(ceilf(value)), NumFormat.short(max_value)]

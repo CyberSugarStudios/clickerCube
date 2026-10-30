@@ -7,9 +7,9 @@
 script = ExtResource("1_teaon")
 id = &"gold_cube_chance"
 display_name = "Golden Cube Chance"
-base_cost = 200.0
-cost_growth = 1.4
-effect_per_level = 0.01
-max_level = 30
+base_cost = 175.0
+cost_growth = 1.35
+effect_per_level = 0.013
+max_level = 18
 required_skill = ExtResource("1_k74el")
 metadata/_custom_type_script = "uid://bq12hl8w5hnj5"
