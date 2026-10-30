@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://bpei2jadp3t3q"]
+
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_jjdm4"]
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="1_voqyl"]
+
+[resource]
+script = ExtResource("1_jjdm4")
+id = &"explosive_radius"
+display_name = "Explosion Radius"
+base_cost = 2000.0
+cost_growth = 10.0
+max_level = 2
+required_skill = ExtResource("1_voqyl")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

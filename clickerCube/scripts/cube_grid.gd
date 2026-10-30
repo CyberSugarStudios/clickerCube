@@ -21,10 +21,17 @@ var layer_hp: Array[float] = []
 var layer_max_hp: Array[float] = []
 var player_target: Cube
 
+var cells: Dictionary[Vector3i, Cube] = {}
+var grid_generation: int = 0
+
 #region - EXPORT VARS
 @export var camera: Camera3D
+
 @export var hp_growth_per_depth: float = 3.0
 @export var gold_growth_per_depth: float = 1.5
+
+@export var damage_numbers: DamageNumbers
+@export var explosion_delay: float = 0.12
 #endregion
 #endregion
 #endregion
@@ -50,27 +57,38 @@ func zoom_camera_to(visible_size: int) -> void:
 	camera_tween = create_tween()
 	camera_tween.tween_property(camera, "position:z", target_z, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+func choose_cube_type() -> CubeTypeData:
+	if GameState.has_skill(GameState.EXPLOSIVE_CUBES_SKILL) and randf() < GameState.explosive_chance:
+		return GameState.EXPLOSIVE_TYPE
+	if GameState.has_skill(GameState.GOLD_CUBE_SKILL) and randf() < GameState.gold_cube_chance:
+		return GameState.GOLDEN_TYPE
+	return null
+
 func roll_cube_type(cube: Cube) -> void:
-	if not GameState.has_skill(GameState.GOLD_CUBE_SKILL):
-		return
-	if randf() >= GameState.gold_cube_chance:
+	var chosen := choose_cube_type()
+	if chosen == null:
 		return
 	var old_max := cube.max_hp
-	cube.cube_type = GameState.GOLDEN_TYPE
-	cube.max_hp *= cube.cube_type.hp_mult
-	cube.cur_hp = cube.max_hp
-	cube.gold_reward *= cube.cube_type.gold_mult
+	cube.cube_type = chosen
+	cube.max_hp *= chosen.hp_mult
+	cube.cur_hp = chosen.max_hp
+	cube.gold_reward += chosen.gold_mult
 	var extra := cube.max_hp - old_max
 	total_hp += extra
 	total_max_hp += extra
 	layer_hp[cube.layer] += extra
 	layer_max_hp[cube.layer] += extra
 
+func cube_explodes(cube: Cube) -> bool:
+	return cube.cube_type != null and cube.cube_type.explodes
+
 func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	#spawn in the cubes at their correct grid position
 	var cube := CUBE_SCENE.instantiate() as Cube
 	cube.position = Vector3(grid_pos) * CUBE_SPACING
 	cube.layer = cube_layer
+	cube.grid_pos = grid_pos
+	cells[grid_pos] = cube
 	cube.max_hp *= pow(hp_growth_per_depth, depth)
 	cube.gold_reward *= pow(gold_growth_per_depth, depth)
 	total_hp += cube.max_hp
@@ -87,6 +105,8 @@ func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 
 func build_grid(size: int) -> void:
 	#grid math
+	cells.clear()
+	grid_generation += 1
 	@warning_ignore("integer_division")
 	var half: int = size / 2
 	active_layer = half
@@ -122,6 +142,9 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 		payout *= 1.0 + GameState.gold_payout_bonus / GameState.GOLDEN_TYPE.gold_mult
 	GameState.add_gold(payout)
 	shells[cube.layer].erase(cube)
+	cells.erase(cube.grid_pos)
+	if cube_explodes(cube):
+		explode_after_delay(cube.grid_pos, grid_generation)
 	
 	if not shells[active_layer].is_empty():
 		return
@@ -158,4 +181,27 @@ func get_active_cubes() -> Array:
 
 func get_visible_size() -> int:
 	return maxi(active_layer, 0) * 2 + 1
+#endregion
+
+#region - EXPLOSIONS
+func explode_after_delay(center: Vector3i, generation: int) -> void:
+	await get_tree().create_timer(explosion_delay).timeout
+	if generation != grid_generation:
+		return
+	var damage := GameState.click_damage * GameState.explosion_damage_mult
+	for cube in get_cubes_in_radius(center, GameState.explosion_radius):
+		if cube.take_damage(damage) and damage_numbers:
+			damage_numbers.spawn(damage, cube.global_position, false)
+
+func get_cubes_in_radius(center: Vector3i, radius: int) -> Array[Cube]:
+	var found: Array[Cube] = []
+	for x in range(-radius, radius + 1):
+		for y in range (-radius, radius + 1):
+			for z in range(-radius, radius + 1):
+				if x == 0 and y == 0 and z == 0:
+					continue
+				var cube: Cube = cells.get(center + Vector3i(x, y, z))
+				if cube:
+					found.append(cube)
+	return found
 #endregion

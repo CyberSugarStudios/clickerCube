@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://l1td5jn6hbei"]
+
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="1_fq1q7"]
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_r3rtj"]
+
+[resource]
+script = ExtResource("1_r3rtj")
+id = &"explosion_data"
+display_name = "Explosion Damage"
+base_cost = 300.0
+cost_growth = 1.35
+effect_per_level = 2.0
+required_skill = ExtResource("1_fq1q7")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

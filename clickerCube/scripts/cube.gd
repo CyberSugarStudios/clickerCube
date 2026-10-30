@@ -13,6 +13,7 @@ var scale_tween: Tween
 var layer: int = 0
 var is_locked: bool = false
 var cube_type: CubeTypeData
+var grid_pos: Vector3i
 
 #region - EXPORT VARS
 @export var max_hp: float = 10

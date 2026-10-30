@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CubeTypeData" format=3 uid="uid://x8ovprljhpu"]
+
+[ext_resource type="Material" uid="uid://crr5mgaj43vqf" path="res://assets/materials/explosive_cube.tres" id="1_1lp0b"]
+[ext_resource type="Script" uid="uid://cw20qndy85yp1" path="res://scripts/data/cube_type_data.gd" id="1_wgef1"]
+
+[resource]
+script = ExtResource("1_wgef1")
+id = &"explosive"
+hp_mult = 0.5
+gold_mult = 2.0
+material = ExtResource("1_1lp0b")
+explodes = true
+metadata/_custom_type_script = "uid://cw20qndy85yp1"

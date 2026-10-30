@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://b2co3vnb4g0sm"]
+
+[ext_resource type="Resource" uid="uid://bvn8mhpv1h07r" path="res://resources/skills/explosive_cubes.tres" id="1_1rtka"]
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_mlu3u"]
+
+[resource]
+script = ExtResource("1_mlu3u")
+id = &"explosive_chance"
+display_name = "Explosive Chance"
+base_cost = 250.0
+cost_growth = 1.4
+effect_per_level = 0.01
+max_level = 15
+required_skill = ExtResource("1_1rtka")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

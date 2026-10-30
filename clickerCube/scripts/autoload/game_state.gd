@@ -29,6 +29,15 @@ const GOLD_CUBE_SKILL: SkillNodeData = preload("res://resources/skills/gold_cube
 const GOLDEN_TYPE: CubeTypeData = preload("res://resources/cube_types/golden.tres")
 const GOLD_CHANCE_UPGRADE: UpgradeData = preload("res://resources/upgrades/gold_cube_chance.tres")
 const GOLD_PAYOUT_UPGRADE: UpgradeData = preload("res://resources/upgrades/gold_cube_payout.tres")
+
+const BASE_EXPLOSIVE_CHANCE: float = 0.02
+const BASE_EXPLOSION_DAMAGE_MULT: float = 5.0
+const BASE_EXPLOSION_RADIUS: int = 1
+const EXPLOSIVE_CUBES_SKILL: SkillNodeData = preload("res://resources/skills/explosive_cubes.tres")
+const EXPLOSIVE_TYPE: CubeTypeData = preload("res://resources/cube_types/explosive.tres")
+const EXPLOSIVE_CHANCE_UPGRADE: UpgradeData = preload("res://resources/upgrades/explosive_chance.tres")
+const EXPLOSIVE_DAMAGE_UPGRADE: UpgradeData = preload("res://resources/upgrades/explosion_damage.tres")
+const EXPLOSIVE_RADIUS_UPGRADE: UpgradeData = preload("res://resources/upgrades/explosive_radius.tres")
 #endregion
 
 #region - VARS
@@ -49,6 +58,10 @@ var drone_click_interval: float = BASE_DRONE_CLICK_INTERVAL
 
 var gold_cube_chance: float = BASE_GOLD_CUBE_CHANCE
 var gold_payout_bonus: float = 0.0
+
+var explosive_chance: float = BASE_EXPLOSIVE_CHANCE
+var explosion_damage_mult: float = BASE_EXPLOSION_DAMAGE_MULT
+var explosion_radius: int = BASE_EXPLOSION_RADIUS
 #endregion
 #endregion
 
@@ -107,10 +120,16 @@ func recalc_stats() -> void:
 	click_damage = BASE_CLICK_DAMAGE + get_level(CLICK_DAMAGE_UPGRADE) * CLICK_DAMAGE_UPGRADE.effect_per_level
 	crit_chance = BASE_CRIT_CHANCE + get_level(CRIT_CHANCE_UPGRADE) * CRIT_CHANCE_UPGRADE.effect_per_level
 	crit_mult = BASE_CRIT_MULT + get_level(CRIT_MULT_UPGRADE) * CRIT_MULT_UPGRADE.effect_per_level
+	
 	drone_damage_mult = BASE_DRONE_DAMAGE_MULT + get_level(DRONE_DAMAGE_UPGRADE) * DRONE_DAMAGE_UPGRADE.effect_per_level
 	drone_click_interval = BASE_DRONE_CLICK_INTERVAL / (1.0 + get_level(DRONE_SPEED_UPGRADE) * DRONE_SPEED_UPGRADE.effect_per_level)
+	
 	gold_cube_chance = BASE_GOLD_CUBE_CHANCE + get_level(GOLD_CHANCE_UPGRADE) * GOLD_CHANCE_UPGRADE.effect_per_level
 	gold_payout_bonus = get_level(GOLD_PAYOUT_UPGRADE) * GOLD_PAYOUT_UPGRADE.effect_per_level
+	
+	explosive_chance = BASE_EXPLOSIVE_CHANCE + get_level(EXPLOSIVE_CHANCE_UPGRADE) * EXPLOSIVE_CHANCE_UPGRADE.effect_per_level
+	explosion_damage_mult = BASE_EXPLOSION_DAMAGE_MULT + get_level(EXPLOSIVE_DAMAGE_UPGRADE) * EXPLOSIVE_DAMAGE_UPGRADE.effect_per_level
+	explosion_radius = BASE_EXPLOSION_RADIUS + get_level(EXPLOSIVE_RADIUS_UPGRADE) * EXPLOSIVE_RADIUS_UPGRADE.effect_per_level
 
 func _ready() -> void:
 	recalc_stats()
