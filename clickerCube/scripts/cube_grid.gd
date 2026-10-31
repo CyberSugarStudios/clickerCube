@@ -193,8 +193,8 @@ func explode_after_delay(center: Vector3i, generation: int) -> void:
 		var hit := damage
 		if cube_explodes(cube):
 			hit = maxf(damage, cube.cur_hp)
-		if cube.take_damage(damage) and damage_numbers:
-			damage_numbers.spawn(damage, cube.global_position, false)
+		if cube.take_damage(hit) and damage_numbers:
+			damage_numbers.spawn(hit, cube.global_position, false)
 
 func get_cubes_in_radius(center: Vector3i, radius: int) -> Array[Cube]:
 	var found: Array[Cube] = []

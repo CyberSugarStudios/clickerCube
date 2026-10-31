@@ -107,8 +107,6 @@ func try_buy_skill(skill: SkillNodeData) -> bool:
 
 func add_gold(amount: float) -> void:
 	gold += amount * DEBUG_GOLD_MULT
-	if DEBUG_GOLD_MULT > 1.0:
-		print("DEBUG GOLD MULT ON")
 	gold_changed.emit(gold)
 
 func roll_crit() -> bool:
@@ -136,6 +134,8 @@ func recalc_stats() -> void:
 	explosion_radius = BASE_EXPLOSION_RADIUS + int(get_level(EXPLOSIVE_RADIUS_UPGRADE) * EXPLOSIVE_RADIUS_UPGRADE.effect_per_level)
 
 func _ready() -> void:
+	if DEBUG_GOLD_MULT > 1.0:
+		push_warning("DEBUG_GOLD_MULT is %s" % DEBUG_GOLD_MULT)
 	recalc_stats()
 
 func try_buy(upgrade: UpgradeData) -> bool:
