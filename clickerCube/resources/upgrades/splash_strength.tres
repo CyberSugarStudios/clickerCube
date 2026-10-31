@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://b4vo6h271txj3"]
+
+[ext_resource type="Resource" uid="uid://do8u4u2c6frx0" path="res://resources/skills/splash_damage.tres" id="1_iyr3b"]
+[ext_resource type="Script" uid="uid://bq12hl8w5hnj5" path="res://scripts/data/upgrade_data.gd" id="1_vqs85"]
+
+[resource]
+script = ExtResource("1_vqs85")
+id = &"splash_strength"
+display_name = "Splash Damage"
+base_cost = 400.0
+cost_growth = 1.45
+effect_per_level = 0.05
+max_level = 8
+required_skill = ExtResource("1_iyr3b")
+metadata/_custom_type_script = "uid://bq12hl8w5hnj5"

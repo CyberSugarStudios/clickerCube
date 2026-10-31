@@ -112,5 +112,7 @@ func tick_click(delta: float) -> void:
 		return
 	click_timer = GameState.drone_click_interval
 	var damage := GameState.get_drone_damage()
-	if target.take_damage(damage):
-		damage_numbers.spawn(damage, target.global_position, false)
+	if not target.take_damage(damage):
+		return
+	if GameState.has_skill(GameState.DRONE_SPLASH_SKILL):
+		grid.apply_splash(target.grid_pos, damage * GameState.splash_fraction)

@@ -81,8 +81,10 @@ func hit_cube_at(screen_pos: Vector2) -> void:
 		grid.player_target = cube
 	var is_crit := GameState.roll_crit()
 	var damage := GameState.get_click_damage(is_crit)
-	if cube.take_damage(damage) and damage_numbers:
-		damage_numbers.spawn(damage, result.position, is_crit)
+	if not cube.take_damage(damage):
+		return
+	if GameState.has_skill(GameState.SPLASH_SKILL):
+		grid.apply_splash(cube.grid_pos, damage * GameState.splash_fraction)
 
 func queue_tap(screen_pos: Vector2) -> void:
 	pending_tap = true

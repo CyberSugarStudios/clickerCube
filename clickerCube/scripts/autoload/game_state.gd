@@ -40,6 +40,17 @@ const EXPLOSIVE_TYPE: CubeTypeData = preload("res://resources/cube_types/explosi
 const EXPLOSIVE_CHANCE_UPGRADE: UpgradeData = preload("res://resources/upgrades/explosive_chance.tres")
 const EXPLOSIVE_DAMAGE_UPGRADE: UpgradeData = preload("res://resources/upgrades/explosion_damage.tres")
 const EXPLOSIVE_RADIUS_UPGRADE: UpgradeData = preload("res://resources/upgrades/explosive_radius.tres")
+
+const BASE_SPLASH_FRACTION: float = 0.1
+const SPLASH_SKILL: SkillNodeData = preload("res://resources/skills/splash_damage.tres")
+const SPLASH_UPGRADE: UpgradeData = preload("res://resources/upgrades/splash_strength.tres")
+
+const DRONE_SPLASH_INTERVAL_MULT: float = 1.5
+const DRONE_SPLASH_SKILL: SkillNodeData = preload("res://resources/skills/drone_splash.tres")
+
+const GOLDEN_BURST_GOLD_MULT: float = 1.5
+const GOLDEN_BURST_SKILL: SkillNodeData = preload("res://resources/skills/gold_explode.tres")
+
 #endregion
 
 #region - VARS
@@ -64,6 +75,8 @@ var gold_payout_bonus: float = 0.0
 var explosive_chance: float = BASE_EXPLOSIVE_CHANCE
 var explosion_damage_mult: float = BASE_EXPLOSION_DAMAGE_MULT
 var explosion_radius: int = BASE_EXPLOSION_RADIUS
+
+var splash_fraction: float = BASE_SPLASH_FRACTION
 #endregion
 #endregion
 
@@ -100,6 +113,7 @@ func try_buy_skill(skill: SkillNodeData) -> bool:
 		return false
 	core_shards -= skill.cost
 	unlocked_skills.append(skill.id)
+	recalc_stats()
 	core_shards_changed.emit(core_shards)
 	skills_changed.emit()
 	return true
@@ -125,6 +139,8 @@ func recalc_stats() -> void:
 	
 	drone_damage_mult = BASE_DRONE_DAMAGE_MULT + get_level(DRONE_DAMAGE_UPGRADE) * DRONE_DAMAGE_UPGRADE.effect_per_level
 	drone_click_interval = BASE_DRONE_CLICK_INTERVAL / (1.0 + get_level(DRONE_SPEED_UPGRADE) * DRONE_SPEED_UPGRADE.effect_per_level)
+	if has_skill(DRONE_SPLASH_SKILL):
+		drone_click_interval *= DRONE_SPLASH_INTERVAL_MULT
 	
 	gold_cube_chance = BASE_GOLD_CUBE_CHANCE + get_level(GOLD_CHANCE_UPGRADE) * GOLD_CHANCE_UPGRADE.effect_per_level
 	gold_payout_bonus = get_level(GOLD_PAYOUT_UPGRADE) * GOLD_PAYOUT_UPGRADE.effect_per_level
@@ -132,6 +148,8 @@ func recalc_stats() -> void:
 	explosive_chance = BASE_EXPLOSIVE_CHANCE + get_level(EXPLOSIVE_CHANCE_UPGRADE) * EXPLOSIVE_CHANCE_UPGRADE.effect_per_level
 	explosion_damage_mult = BASE_EXPLOSION_DAMAGE_MULT + get_level(EXPLOSIVE_DAMAGE_UPGRADE) * EXPLOSIVE_DAMAGE_UPGRADE.effect_per_level
 	explosion_radius = BASE_EXPLOSION_RADIUS + int(get_level(EXPLOSIVE_RADIUS_UPGRADE) * EXPLOSIVE_RADIUS_UPGRADE.effect_per_level)
+	
+	splash_fraction = BASE_SPLASH_FRACTION + get_level(SPLASH_UPGRADE) * SPLASH_UPGRADE.effect_per_level
 
 func _ready() -> void:
 	if DEBUG_GOLD_MULT > 1.0:

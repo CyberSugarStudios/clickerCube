@@ -79,9 +79,6 @@ func roll_cube_type(cube: Cube) -> void:
 	layer_hp[cube.layer] += extra
 	layer_max_hp[cube.layer] += extra
 
-func cube_explodes(cube: Cube) -> bool:
-	return cube.cube_type != null and cube.cube_type.explodes
-
 func spawn_cube(grid_pos: Vector3i, cube_layer: int, depth: int) -> void:
 	#spawn in the cubes at their correct grid position
 	var cube := CUBE_SCENE.instantiate() as Cube
@@ -140,6 +137,8 @@ func _on_cube_broken(gold_reward: float, cube: Cube) -> void:
 	var payout := gold_reward
 	if cube.cube_type == GameState.GOLDEN_TYPE:
 		payout *= 1.0 + GameState.gold_payout_bonus / GameState.GOLDEN_TYPE.gold_mult
+		if GameState.has_skill(GameState.GOLDEN_BURST_SKILL):
+			payout *= GameState.GOLDEN_BURST_GOLD_MULT
 	GameState.add_gold(payout)
 	shells[cube.layer].erase(cube)
 	cells.erase(cube.grid_pos)
@@ -184,6 +183,13 @@ func get_visible_size() -> int:
 #endregion
 
 #region - EXPLOSIONS
+func cube_explodes(cube: Cube) -> bool:
+	if cube.cube_type == null:
+		return false
+	if cube.cube_type.explodes:
+		return true
+	return cube.cube_type == GameState.GOLDEN_TYPE and GameState.has_skill(GameState.GOLDEN_BURST_SKILL)
+
 func explode_after_delay(center: Vector3i, generation: int) -> void:
 	await get_tree().create_timer(explosion_delay).timeout
 	if generation != grid_generation:
@@ -207,4 +213,8 @@ func get_cubes_in_radius(center: Vector3i, radius: int) -> Array[Cube]:
 				if cube:
 					found.append(cube)
 	return found
+
+func apply_splash(center: Vector3i, amount: float) -> void:
+	for cube in get_cubes_in_radius(center, 1):
+		cube.take_damage(amount)
 #endregion

@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://cx2pbf1w3fagp" path="res://resources/upgrades/click_damage.tres" id="4_o6xl0"]
 [ext_resource type="Resource" uid="uid://ckyvyfos60h24" path="res://resources/upgrades/crit_chance.tres" id="5_tipki"]
 [ext_resource type="Resource" uid="uid://brbbfrqcrlrsy" path="res://resources/upgrades/crit_mult.tres" id="6_85g3d"]
+[ext_resource type="Resource" uid="uid://b4vo6h271txj3" path="res://resources/upgrades/splash_strength.tres" id="6_yc10j"]
 [ext_resource type="Script" uid="uid://cugv1lg0bijqd" path="res://scripts/ui/galaxy_button.gd" id="7_85g3d"]
 [ext_resource type="Script" uid="uid://0oljupp01s1h" path="res://scripts/ui/damage_numbers.gd" id="7_choun"]
 [ext_resource type="Resource" uid="uid://dv4b3vha2g54i" path="res://resources/upgrades/drone_damage.tres" id="7_eb6dy"]
@@ -102,6 +103,10 @@ size_flags_horizontal = 3
 [node name="ClickDamageButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1140706275 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("4_o6xl0")
+
+[node name="ClickSplashUpgrade" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=550142185 instance=ExtResource("3_jyhfs")]
+layout_mode = 2
+upgrade = ExtResource("6_yc10j")
 
 [node name="CritChanceButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=464859243 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
