@@ -104,7 +104,7 @@ func try_buy_skill(skill: SkillNodeData) -> bool:
 #endregion
 
 func add_gold(amount: float) -> void:
-	gold += amount
+	gold += amount * 999
 	gold_changed.emit(gold)
 
 func roll_crit() -> bool:

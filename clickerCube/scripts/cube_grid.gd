@@ -28,7 +28,7 @@ var grid_generation: int = 0
 @export var camera: Camera3D
 
 @export var hp_growth_per_depth: float = 3.0
-@export var gold_growth_per_depth: float = 1.5
+@export var gold_growth_per_depth: float = 2.5
 
 @export var damage_numbers: DamageNumbers
 @export var explosion_delay: float = 0.12

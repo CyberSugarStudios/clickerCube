@@ -73,64 +73,73 @@ offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="UpgradeList" type="VBoxContainer" parent="UI/ShopPanel" unique_id=978731285]
+[node name="ShopLayout" type="VBoxContainer" parent="UI/ShopPanel" unique_id=707196259]
 layout_mode = 2
 
-[node name="GoldLabel" type="Label" parent="UI/ShopPanel/UpgradeList" unique_id=43094549]
+[node name="GoldLabel" type="Label" parent="UI/ShopPanel/ShopLayout" unique_id=43094549]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Gold: 0"
 horizontal_alignment = 1
 script = ExtResource("2_0wfyh")
 
-[node name="UpgradesLabel" type="Label" parent="UI/ShopPanel/UpgradeList" unique_id=1603557011]
+[node name="UpgradesLabel" type="Label" parent="UI/ShopPanel/ShopLayout" unique_id=1603557011]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Upgrades"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ClickDamageButton" parent="UI/ShopPanel/UpgradeList" unique_id=1140706275 instance=ExtResource("3_jyhfs")]
+[node name="UpgradeScroll" type="ScrollContainer" parent="UI/ShopPanel/ShopLayout" unique_id=881286697]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="UpgradeList" type="VBoxContainer" parent="UI/ShopPanel/ShopLayout/UpgradeScroll" unique_id=978731285]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClickDamageButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1140706275 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("4_o6xl0")
 
-[node name="CritChanceButton" parent="UI/ShopPanel/UpgradeList" unique_id=464859243 instance=ExtResource("3_jyhfs")]
+[node name="CritChanceButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=464859243 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("5_tipki")
 
-[node name="CritMultButton" parent="UI/ShopPanel/UpgradeList" unique_id=1462302245 instance=ExtResource("3_jyhfs")]
+[node name="CritMultButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1462302245 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("6_85g3d")
 
-[node name="NewDroneButton" parent="UI/ShopPanel/UpgradeList" unique_id=1527565188 instance=ExtResource("3_jyhfs")]
+[node name="NewDroneButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1527565188 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("8_trceg")
 
-[node name="DroneDamageButton" parent="UI/ShopPanel/UpgradeList" unique_id=988456290 instance=ExtResource("3_jyhfs")]
+[node name="DroneDamageButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=988456290 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("7_eb6dy")
 
-[node name="DroneClickSpeedButton" parent="UI/ShopPanel/UpgradeList" unique_id=1256206762 instance=ExtResource("3_jyhfs")]
+[node name="DroneClickSpeedButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1256206762 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("9_a8y0u")
 
-[node name="GoldCubeChanceButton" parent="UI/ShopPanel/UpgradeList" unique_id=1500182023 instance=ExtResource("3_jyhfs")]
+[node name="GoldCubeChanceButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1500182023 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("11_jbj1t")
 
-[node name="GoldCubePayoutButton" parent="UI/ShopPanel/UpgradeList" unique_id=959911806 instance=ExtResource("3_jyhfs")]
+[node name="GoldCubePayoutButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=959911806 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("12_muem4")
 
-[node name="ExplosionChanceButton" parent="UI/ShopPanel/UpgradeList" unique_id=1123069929 instance=ExtResource("3_jyhfs")]
+[node name="ExplosionChanceButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1123069929 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("14_0ld40")
 
-[node name="ExplosionDamageButton" parent="UI/ShopPanel/UpgradeList" unique_id=1584084506 instance=ExtResource("3_jyhfs")]
+[node name="ExplosionDamageButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1584084506 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("13_dp3eg")
 
-[node name="ExplosionRadiusButton" parent="UI/ShopPanel/UpgradeList" unique_id=1382286521 instance=ExtResource("3_jyhfs")]
+[node name="ExplosionRadiusButton" parent="UI/ShopPanel/ShopLayout/UpgradeScroll/UpgradeList" unique_id=1382286521 instance=ExtResource("3_jyhfs")]
 layout_mode = 2
 upgrade = ExtResource("15_gqmmt")
 
