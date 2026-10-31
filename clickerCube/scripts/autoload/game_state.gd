@@ -9,6 +9,8 @@ signal run_started
 signal skills_changed
 
 #region - CONSTS
+const DEBUG_GOLD_MULT: float = 1.0
+
 const BASE_CLICK_DAMAGE: float = 1.0
 const BASE_CRIT_CHANCE: float = 0.05
 const BASE_CRIT_MULT: float = 2.0
@@ -104,7 +106,9 @@ func try_buy_skill(skill: SkillNodeData) -> bool:
 #endregion
 
 func add_gold(amount: float) -> void:
-	gold += amount * 999
+	gold += amount * DEBUG_GOLD_MULT
+	if DEBUG_GOLD_MULT > 1.0:
+		print("DEBUG GOLD MULT ON")
 	gold_changed.emit(gold)
 
 func roll_crit() -> bool:

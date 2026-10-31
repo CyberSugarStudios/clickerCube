@@ -190,6 +190,9 @@ func explode_after_delay(center: Vector3i, generation: int) -> void:
 		return
 	var damage := GameState.click_damage * GameState.explosion_damage_mult
 	for cube in get_cubes_in_radius(center, GameState.explosion_radius):
+		var hit := damage
+		if cube_explodes(cube):
+			hit = maxf(damage, cube.cur_hp)
 		if cube.take_damage(damage) and damage_numbers:
 			damage_numbers.spawn(damage, cube.global_position, false)
 
